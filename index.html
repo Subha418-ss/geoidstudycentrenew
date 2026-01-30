@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GEOID STUDY CENTRE | Premium Academic Portal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Text:ital,wght@0,600;1,700&family=Montserrat:wght@300;400;600;800&family=Hind+Siliguri:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #B30000;
+            --secondary: #FF9933;
+            --accent: #FFCC00;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --gray: #f4f4f4;
+            --blue-dept: #0b4a8f; 
+        }
+
+        * { box-sizing: border-box; transition: all 0.3s ease; }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            margin: 0;
+            background-image: url('https://images.unsplash.com/photo-1557804506-669f6874e0d9?auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-attachment: fixed;
+            background-blend-mode: overlay;
+            background-color: rgba(255, 255, 255, 0.92);
+            color: var(--dark);
+            user-select: none;
+        }
+
+        /* ===== PROFESSIONAL TOP BAR ===== */
+        .top-info-bar {
+            background: var(--dark);
+            color: white;
+            padding: 5px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border-bottom: 2px solid var(--secondary);
+        }
+        .info-left, .info-right { display: flex; gap: 20px; align-items: center; }
+        .status-dot { height: 8px; width: 8px; background: #2ecc71; border-radius: 50%; display: inline-block; margin-right: 5px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+        /* Fixed Header Styles */
+        header {
+            background: white;
+            padding: 10px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 4px solid var(--secondary);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .brand-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: inherit; }
+        
+        .logo-circle {
+            height: 45px; width: 45px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+        }
+        .logo-circle img { height: 35px; width: auto; object-fit: contain; }
+
+        .brand-text h1 { margin: 0; font-family: 'Crimson Text', serif; color: var(--primary); font-size: 1.6rem; line-height: 1; }
+        .bangla-slogan { font-family: 'Hind Siliguri', sans-serif; font-weight: 700; color: #555; font-size: 0.85rem; margin-top: 3px; }
+
+        .auth-buttons { display: flex; gap: 10px; }
+        .btn-top { padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.75rem; color: white; }
+        .btn-student { background: var(--dark); }
+        .btn-admin { background: var(--primary); }
+
+        nav { background: var(--secondary); position: sticky; top: 0; z-index: 1000; }
+        nav ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; }
+        nav ul li a { color: white; text-decoration: none; padding: 15px 20px; display: block; font-weight: 600; font-size: 0.85rem; }
+        nav ul li a:hover { background: var(--primary); }
+
+        .notice-ticker {
+            background: #fff3cd;
+            border-bottom: 1px solid #ffeeba;
+            display: flex;
+            align-items: center;
+            padding: 5px 5%;
+            font-size: 0.85rem;
+        }
+        .ticker-label {
+            background: var(--primary);
+            color: white;
+            padding: 2px 10px;
+            font-weight: 800;
+            border-radius: 3px;
+            margin-right: 15px;
+            white-space: nowrap;
+            font-size: 0.75rem;
+        }
+
+        .hero {
+            height: 350px;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://confident-lavender-napbmekmcx.edgeone.app/banner.png') center/cover;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; color: white; text-align: center; padding: 20px;
+        }
+        .hero h2 { font-size: 3rem; margin: 0; font-family: 'Crimson Text', serif; }
+
+        .stats-bar {
+            background: white; width: 90%; max-width: 1100px; margin: -50px auto 30px; display: flex; justify-content: space-around; padding: 25px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); position: relative; z-index: 5;
+        }
+        .stat-item { text-align: center; }
+        .stat-item h3 { color: var(--primary); font-size: 2rem; margin: 0; }
+        .stat-item p { margin: 0; font-size: 0.8rem; font-weight: bold; color: #666; }
+
+        .main-grid {
+            max-width: 1200px; margin: 40px auto; display: grid; grid-template-columns: 2fr 1fr; gap: 25px; padding: 0 20px;
+        }
+
+        .card { background: white; padding: 25px; border-radius: 8px; border-top: 5px solid var(--primary); box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 25px; }
+        .card-title { color: var(--primary); font-family: 'Crimson Text', serif; font-size: 1.5rem; border-bottom: 2px solid var(--secondary); margin-bottom: 20px; padding-bottom: 5px; }
+
+        .notice-board {
+            background: #fdfdfd;
+            border: 1px solid #eee;
+            border-top: 5px solid var(--blue-dept);
+        }
+        .notice-list { list-style: none; padding: 0; margin: 0; }
+        .notice-item {
+            padding: 12px 0;
+            border-bottom: 1px dashed #ddd;
+            display: block;
+            text-decoration: none;
+            color: #444;
+        }
+        .notice-item:last-child { border-bottom: none; }
+        .notice-date {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--primary);
+            font-weight: 800;
+            margin-bottom: 3px;
+        }
+        .notice-text { font-size: 0.85rem; font-weight: 600; line-height: 1.4; }
+        .notice-item:hover .notice-text { color: var(--primary); text-decoration: underline; }
+
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 8px; margin-bottom: 10px; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+        .gallery-mini { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .gallery-mini img { width: 100%; height: 100px; object-fit: cover; border-radius: 5px; }
+
+        .suggestion-box { background: #fff8f0; border: 1px dashed var(--secondary); padding: 15px; border-radius: 8px; margin-top: 15px; text-align: center; }
+        .btn-action { display: inline-block; background: var(--primary); color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px; font-size: 0.8rem; font-weight: bold; margin-top: 10px; }
+
+        .ceo-section { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .ceo-card { background: white; border-radius: 15px; overflow: hidden; display: flex; flex-wrap: wrap; box-shadow: 0 10px 30px rgba(0,0,0,0.1); border-left: 8px solid var(--primary); }
+        .ceo-image { flex: 1; min-width: 300px; background: url('https://ik.imagekit.io/8v5m0fw9z/WhatsApp_Image_2025-12-28_at_10.49.44_AM-removebg-preview.png') center/contain no-repeat #f9f9f9; height: 400px; }
+        .ceo-content { flex: 2; padding: 40px; min-width: 300px; }
+        .ceo-content h2 { font-family: 'Crimson Text', serif; color: var(--primary); font-size: 2.2rem; margin: 0; }
+        .ceo-quote { font-style: italic; font-size: 1.1rem; color: #555; border-left: 4px solid var(--secondary); padding-left: 20px; margin: 20px 0; line-height: 1.6; }
+
+        footer { background: var(--dark); color: #ccc; padding: 60px 5% 20px; margin-top: 80px; border-top: 8px solid var(--secondary); }
+        .footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+        .footer-col h4 { color: white; border-bottom: 2px solid var(--primary); display: inline-block; padding-bottom: 5px; }
+        .footer-col a { color: #bbb; text-decoration: none; display: block; margin-bottom: 8px; font-size: 0.85rem; }
+
+        .dev-credit { margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; text-align: center; }
+        .dev-link { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px; border: 1px solid var(--accent); text-decoration: none; color: var(--accent); font-weight: 800; }
+
+        @media (max-width: 992px) {
+            .main-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 768px) {
+            header { flex-direction: column; gap: 15px; }
+            .hero h2 { font-size: 2rem; }
+            .stats-bar { flex-direction: column; gap: 20px; align-items: center; }
+            .ceo-card { flex-direction: column; }
+            .ceo-image { height: 300px; }
+            .top-info-bar { flex-direction: column; gap: 5px; text-align: center; }
+        }
+    </style>
+</head>
+<body oncontextmenu="return false;">
+
+    <div class="top-info-bar">
+        <div class="info-left">
+            <span><i class="far fa-calendar-alt"></i> <span id="currentDate"></span></span>
+            <span><i class="far fa-clock"></i> <span id="currentDay"></span></span>
+        </div>
+        <div class="info-right">
+            <span><span class="status-dot"></span> Server Status: <b style="color:#2ecc71">LIVE</b></span>
+            <span><i class="fas fa-users"></i> Visitors: <b id="visitorCount" style="color:var(--accent)">1,482</b></span>
+        </div>
+    </div>
+
+    <header>
+        <a href="index.html" class="brand-link">
+            <div class="logo-circle">
+                <img src="https://deliberate-amber-gfvdqe4djb.edgeone.app/logo.jpg" alt="Logo">
+            </div>
+            <div class="brand-text">
+                <h1>GEOID STUDY CENTRE</h1>
+                <div class="bangla-slogan">শিক্ষা আনে চেতনা, চেতনা আনে বিপ্লব</div>
+            </div>
+        </a>
+        <div class="auth-buttons">
+            <a href="login.html" class="btn-top btn-student">STUDENT PORTAL</a>
+            <a href="admin.html" class="btn-top btn-admin">ADMIN LOGIN</a>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">HOME</a></li>
+            <li><a href="Admission.html">ADMISSION</a></li>
+            <li><a href="#">COURSES</a></li>
+            <li><a href="resource.html">RESOURCES</a></li>
+            <li><a href="https://geoidstudycentre-djlyg.wordpress.com/">ALUMNI</a></li>
+            <li><a href="contact.html">CONTACT</a></li>
+        </ul>
+    </nav>
+
+    <div class="notice-ticker">
+        <span class="ticker-label"><i class="fas fa-bullhorn"></i> URGENT</span>
+        <marquee onmouseover="this.stop();" onmouseout="this.start();">
+            Admission Open for 2026 batches. | Download Madhyamik Suggestion 2026 from the resources section. | Congratulations to our students for 100% success rate in 2025 examinations.
+        </marquee>
+    </div>
+
+    <section class="hero">
+        <h2>Empowering Minds, Shaping Futures</h2>
+        <p>Premium Learning Experience for Modern Students</p>
+    </section>
+
+    <div class="stats-bar">
+        <div class="stat-item"><h3>6+</h3><p>YEARS EXP</p></div>
+        <div class="stat-item"><h3>25+</h3><p>STUDENTS</p></div>
+        <div class="stat-item"><h3>100%</h3><p>SUCCESS RATE</p></div>
+        <div class="stat-item"><h3>24/7</h3><p>AI SUPPORT</p></div>
+    </div>
+
+    <div class="main-grid">
+        <div class="left-col">
+            <div class="card">
+                <div class="card-title">Latest Updates</div>
+                <div class="video-container">
+                    <iframe src="https://ik.imagekit.io/18itosdvc/1%20no.mp4" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="font-size: 0.85rem; font-weight: bold; margin-bottom: 15px;">New Update: Tree Plantation Program 2026</p>
+                <div class="gallery-mini">
+                    <img src="https://ik.imagekit.io/18itosdvc/P-1.jpeg" alt="G1">
+                    <img src="https://ik.imagekit.io/18itosdvc/P%20-%202.jpeg" alt="G2">
+                    <img src="https://ik.imagekit.io/18itosdvc/P-3.jpeg" alt="G3">
+                    <img src="https://ik.imagekit.io/18itosdvc/P-4.jpeg" alt="G4">
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Academic & Resources</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                    <div class="suggestion-box">
+                        <i class="fas fa-file-pdf" style="font-size: 2rem; color: var(--primary);"></i>
+                        <h4>Madhyamik Suggestion 2026</h4>
+                        <p style="font-size: 0.8rem;">Subject: Geography | By Mr. Sukdeb Das</p>
+                        <a href="#" class="btn-action">VIEW SUGGESTION</a>
+                    </div>
+                    <div class="suggestion-box" style="background: #eef7ff; border-color: #3498db;">
+                        <i class="fas fa-book" style="font-size: 2rem; color: #3498db;"></i>
+                        <h4>Developer Handbook</h4>
+                        <p style="font-size: 0.8rem;">By Subhadip Satpati (1st Ed 2025)</p>
+                        <a href="https://drive.google.com/file/d/1Cq7CueGS5ZqpqTO6bNrIjlLrZ9EbOVCr/view" class="btn-action" style="background:#3498db;">DOWNLOAD PDF</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <aside class="sidebar">
+            <div class="card notice-board">
+                <div class="card-title" style="border-color: var(--blue-dept); color: var(--blue-dept);">
+                    <i class="fas fa-clipboard-list"></i> NOTICE BOARD
+                </div>
+                <div class="notice-list">
+                    <a href="#" class="notice-item">
+                        <span class="notice-date">30 JAN 2026</span>
+                        <span class="notice-text">Registration open for the Mock Test Series 2026.</span>
+                    </a>
+                    <a href="#" class="notice-item">
+                        <span class="notice-date">25 JAN 2026</span>
+                        <span class="notice-text">Holiday Notice: Saraswati Puja celebration at the centre.</span>
+                    </a>
+                    <a href="#" class="notice-item">
+                        <span class="notice-date">15 JAN 2026</span>
+                        <span class="notice-text">New Geography Map Pointing classes start from Monday.</span>
+                    </a>
+                    <a href="#" class="notice-item">
+                        <span class="notice-date">10 JAN 2026</span>
+                        <span class="notice-text">Alumni Meet 2026: Registration extended until February.</span>
+                    </a>
+                </div>
+                <div style="text-align: right; margin-top: 15px;">
+                    <a href="notice.html" style="font-size: 0.75rem; color: var(--blue-dept); font-weight: 800; text-decoration: none;">VIEW ALL NOTICES →</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">Video Lectures</div>
+                <div class="video-container">
+                    <iframe src="https://www.youtube.com/embed/Jy7UlXnA4mo" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <p style="font-size: 0.8rem; font-weight: bold;">জোয়ার ভাটা: কারণ ও ফলাফল বিস্তারিত আলোচনা</p>
+            </div>
+        </aside>
+    </div>
+
+    <section class="ceo-section">
+        <div class="ceo-card">
+            <div class="ceo-image"></div>
+            <div class="ceo-content">
+                <h2>Message from the CEO</h2>
+                <div class="ceo-quote">
+                    "Education is the most powerful weapon which you can use to change the world. At GEOID, we don't just teach, we empower."
+                </div>
+                <p style="line-height: 1.8; color: #444;">
+                    Welcome to Geoid Study Centre. Our mission is conceptual clarity. Under <strong>Mr. Sukdeb Das</strong>, we continue to lead.
+                </p>
+                <p style="margin-top: 20px; font-weight: bold; color: var(--primary);">
+                    — Mr. Sukdeb Das<br>
+                    <span style="font-size: 0.8rem; color: #777;">Founder & CEO, Geoid Study Centre</span>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>GEOID CENTRE</h4>
+                <p style="font-size: 0.85rem;">Contai, Central Bus Stand, Purba Medinipur.</p>
+                <p style="font-size: 0.85rem;">Helpline: +91 8207084112</p>
+            </div>
+            <div class="footer-col">
+                <h4>Policies</h4>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="disclaimer.html">Disclaimer</a>
+            </div>
+            <div class="footer-col">
+                <h4>Student Corner</h4>
+                <a href="login.html">Portal Login</a>
+                <a href="Admission.html">Online Admissions</a>
+            </div>
+        </div>
+        <div class="dev-credit">
+            <p style="font-size: 0.8rem; margin-bottom: 15px;">&copy; 2026 Geoid Study Centre. All Rights Reserved.</p>
+            <a href="https://subha418-ss.github.io/Subhadip-Satpati/" class="dev-link" target="_blank">
+                <span>DESIGNED & DEVELOPED BY SUBHADIP SATPATI</span>
+            </a>
+        </div>
+    </footer>
+
+    <script>
+        // Update Date and Day
+        function updateDateTime() {
+            const now = new Date();
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const dayOptions = { weekday: 'long' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('en-US', dateOptions);
+            document.getElementById('currentDay').textContent = now.toLocaleDateString('en-US', dayOptions);
+        }
+
+        // Professional Visitor Counter Simulation
+        function initVisitorCounter() {
+            let count = localStorage.getItem('visitorCount') || 1482;
+            if (!sessionStorage.getItem('sessionStarted')) {
+                count = parseInt(count) + 1;
+                localStorage.setItem('visitorCount', count);
+                sessionStorage.setItem('sessionStarted', 'true');
+            }
+            document.getElementById('visitorCount').textContent = count.toLocaleString();
+        }
+
+        updateDateTime();
+        initVisitorCounter();
+
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+            if(e.ctrlKey && e.keyCode == 85) return false;
+        };
+    </script>
+</body>
+</html>
