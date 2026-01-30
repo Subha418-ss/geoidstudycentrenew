@@ -20,36 +20,41 @@
             padding: 0;
             background-color: var(--bg-gray);
             font-size: 15px;
+            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         /* Top Govt-Style Header */
         .gov-top-bar {
             background: #fff;
-            padding: 10px 8%;
+            padding: 10px 5%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 1px solid #ddd;
+            flex-wrap: wrap; /* Allows stacking on small screens */
+            gap: 15px;
         }
 
         .gov-logos { display: flex; align-items: center; gap: 20px; }
-        .gov-logos img { height: 60px; }
+        .gov-logos img { height: 60px; max-width: 100%; }
 
         .header-title { text-align: right; }
-        .header-title h2 { margin: 0; color: var(--nta-blue); font-size: 22px; text-transform: uppercase; }
-        .header-title p { margin: 0; font-weight: bold; color: #444; font-size: 14px; }
+        .header-title h2 { margin: 0; color: var(--nta-blue); font-size: clamp(18px, 4vw, 22px); text-transform: uppercase; }
+        .header-title p { margin: 0; font-weight: bold; color: #444; font-size: clamp(12px, 3vw, 14px); }
 
         /* Blue Navigation Bar */
         nav {
             background: var(--nta-blue);
-            padding: 0 8%;
+            padding: 0 5%;
             display: flex;
             align-items: center;
+            overflow-x: auto; /* Allows swiping on mobile */
+            white-space: nowrap;
         }
         nav a {
             color: white;
             text-decoration: none;
-            padding: 12px 20px;
+            padding: 12px 15px;
             font-size: 14px;
             font-weight: bold;
             border-right: 1px solid rgba(255,255,255,0.2);
@@ -75,7 +80,7 @@
             font-size: 18px;
         }
 
-        .form-wrapper { padding: 30px; }
+        .form-wrapper { padding: clamp(15px, 5vw, 30px); }
 
         .instruction-box {
             background: #fff3cd;
@@ -114,6 +119,7 @@
             width: 100%;
             box-sizing: border-box;
             font-family: "Times New Roman", serif;
+            font-size: 16px; /* Prevents auto-zoom on iOS */
         }
 
         input:focus { border-color: var(--nta-blue); outline: none; box-shadow: 0 0 4px rgba(11,74,143,0.2); }
@@ -123,6 +129,9 @@
             padding: 20px;
             border-top: 1px solid #ccc;
             background: #f9f9f9;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
         }
 
         .btn-nta {
@@ -139,14 +148,34 @@
         footer {
             background: #333;
             color: white;
-            padding: 20px 8%;
+            padding: 20px 5%;
             text-align: center;
             font-size: 13px;
         }
 
+        /* ===== MOBILE RESPONSIVE UPDATES ===== */
         @media (max-width: 768px) {
-            .form-grid { grid-template-columns: 1fr; }
+            .gov-top-bar { justify-content: center; text-align: center; }
+            .header-title { text-align: center; }
+            
+            .form-grid { 
+                grid-template-columns: 1fr; /* Stack labels and inputs */
+                gap: 5px;
+            }
+            
+            .form-grid label {
+                margin-top: 10px;
+            }
+
             .container { margin: 0; border: none; }
+            
+            .btn-container { flex-direction: column; }
+            .btn-nta, button[type="reset"] { width: 100%; }
+        }
+
+        @media (max-width: 480px) {
+            .gov-logos img { height: 50px; }
+            nav a { padding: 12px 10px; font-size: 12px; }
         }
     </style>
 </head>
@@ -174,9 +203,9 @@
         
         <div class="form-wrapper">
             <div class="instruction-box">
-                <strong>Instructions:</strong> 
-                1. Candidates must provide their own Mobile Number and Email ID. 
-                2. One candidate can apply for one course only. 
+                <strong>Instructions:</strong> <br>
+                1. Candidates must provide their own Mobile Number and Email ID. <br>
+                2. One candidate can apply for one course only. <br>
                 3. Please ensure all details match your school records.
             </div>
 
@@ -194,7 +223,7 @@
                         <input type="text" required>
 
                         <label>Date of Birth:</label>
-                        <div style="display: flex; gap: 10px;">
+                        <div style="display: flex; gap: 5px;">
                             <select style="flex: 1;"><option>Day</option></select>
                             <select style="flex: 1;"><option>Month</option></select>
                             <select style="flex: 1;"><option>Year</option></select>
@@ -245,13 +274,13 @@
                         </select>
                         
                         <label>Upload Photo:</label>
-                        <input type="file" required>
+                        <input type="file" required style="font-size: 14px;">
                     </div>
                 </fieldset>
 
                 <div class="btn-container">
                     <button type="submit" class="btn-nta">Submit Application</button>
-                    <button type="reset" style="padding: 10px 20px; cursor: pointer; background: #fff; border: 1px solid #ccc;">Clear</button>
+                    <button type="reset" style="padding: 10px 20px; cursor: pointer; background: #fff; border: 1px solid #ccc; font-weight: bold;">Clear</button>
                 </div>
             </form>
         </div>
@@ -262,5 +291,13 @@
         <p>&copy; 2026 Geoid Study Centre. Version 4.0.0</p>
     </footer>
 
+    <script>
+        // Retention of current date functionality if needed
+        document.onkeydown = function(e) {
+            if(e.keyCode == 123) return false;
+            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
+            if(e.ctrlKey && e.keyCode == 85) return false;
+        };
+    </script>
 </body>
 </html>
