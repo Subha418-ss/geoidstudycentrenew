@@ -7,388 +7,219 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
-            --nta-blue: #0b4a8f;
-            --nta-dark: #07366b;
-            --nta-orange: #f38120;
-            --bg: #f8f9fc;
-            --white: #ffffff;
-            --text-main: #2d3436;
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-            --danger: #e74c3c;
+            --primary-deep: #1a2a6c;
+            --accent-gold: #fdbb2d;
+            --sidebar-bg: #ffffff;
+            --text-dark: #2d3436;
+            --grid-color: #2980b9;
+            --shadow-3d: 6px 6px 12px rgba(0, 0, 0, 0.45), inset -2px -2px 4px rgba(0,0,0,0.2);
         }
 
-        body {
-            margin: 0;
-            font-family: "Times New Roman", Times, serif;
-            background: var(--bg);
-            color: var(--text-main);
-            display: flex;
-            flex-direction: column;
-            min-height: 100vh;
-        }
+        body { margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; background-color: #e9ecef; }
+        .banner-container { width: 100%; background: white; text-align: center; border-bottom: 3px solid var(--primary-deep); }
+        .banner-container img { max-width: 550px; width: 100%; height: auto; }
+        
+        .portal-main { display: flex; min-height: calc(100vh - 110px); }
+        .sidebar { width: 240px; background: var(--sidebar-bg); border-right: 1px solid #ddd; }
+        .profile-area { padding: 25px 10px; text-align: center; border-bottom: 1px solid #eee; }
+        .profile-area img { width: 85px; height: 95px; border: 2px solid var(--primary-deep); object-fit: cover; border-radius: 4px; }
+        .profile-area h4 { margin: 12px 0 5px; color: var(--primary-deep); font-size: 14px; text-transform: uppercase; }
+        
+        .menu-label { background: var(--primary-deep); color: white; padding: 8px 15px; font-size: 11px; font-weight: bold; }
+        .nav-list { list-style: none; padding: 0; margin: 0; }
+        .nav-list li { padding: 12px 15px; border-bottom: 1px solid #f0f0f0; font-size: 12.5px; color: var(--text-dark); cursor: pointer; display: flex; align-items: center; gap: 10px; }
+        .nav-list li:hover { background: #f8f9fa; color: var(--grid-color); }
 
-        /* ===== TOP NAVIGATION ===== */
-        .top-nav {
-            background: var(--white);
-            padding: 0 5%;
-            height: 60px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 3px solid var(--nta-blue);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+        .content-area { flex: 1; padding: 30px; background-color: #f1f3f5; }
+        .grid-container { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; max-width: 1100px; margin: 0 auto; }
+        
+        .grid-box { 
+            background: var(--grid-color); color: white; text-decoration: none; 
+            padding: 15px 10px; border-radius: 10px; text-align: center; 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; 
+            gap: 8px; font-weight: bold; font-size: 11px; box-shadow: var(--shadow-3d); height: 100px; 
+            transition: 0.3s ease;
         }
-        .back-home {
-            text-decoration: none;
-            color: var(--nta-blue);
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.95rem;
-        }
+        .grid-box:hover { transform: translateY(-5px); filter: brightness(1.1); }
+        .grid-box i { font-size: 24px; color: var(--accent-gold); }
 
-        /* ===== HERO SECTION ===== */
-        .hero-banner {
-            background: linear-gradient(135deg, var(--nta-dark) 0%, var(--nta-blue) 100%);
-            color: white;
-            text-align: center;
-            padding: 40px 20px;
-            box-shadow: inset 0 -10px 20px rgba(0,0,0,0.1);
-        }
-        .hero-banner h1 { font-size: 1.8rem; margin: 0; letter-spacing: 1px; }
-        .hero-banner p { opacity: 0.9; font-style: italic; margin: 10px 0 0; }
+        .auth-card { max-width: 400px; margin: 50px auto; background: white; padding: 35px; border-radius: 12px; box-shadow: 0 8px 25px rgba(0,0,0,0.1); text-align: center; }
+        .form-input { width: 100%; padding: 10px; margin: 8px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .btn-submit { background: var(--primary-deep); color: white; border: none; width: 100%; padding: 12px; font-weight: bold; border-radius: 4px; cursor: pointer; margin-top: 10px; }
 
-        /* ===== RESPONSIVE WRAPPER ===== */
-        .wrapper {
-            max-width: 1300px;
-            margin: 20px auto;
-            width: 95%;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 25px;
-            flex: 1;
-        }
-
-        @media (min-width: 1024px) {
-            .wrapper { grid-template-columns: 280px 1fr 320px; }
-        }
-
-        /* ===== COMMON COMPONENTS ===== */
-        .glass-card {
-            background: var(--white);
-            border: 1px solid #e1e8ed;
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .section-header {
-            background: #f1f4f9;
-            padding: 12px 18px;
-            border-bottom: 2px solid var(--nta-blue);
-            font-weight: bold;
-            color: var(--nta-blue);
-            font-size: 1rem;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        /* ===== AUTHENTICATION ===== */
-        .auth-container { padding: 30px; text-align: center; }
-        .auth-container h2 { margin-bottom: 25px; color: var(--nta-dark); }
-        .form-group { text-align: left; margin-bottom: 18px; }
-        .form-group label { display: block; font-weight: bold; margin-bottom: 6px; font-size: 0.9rem; }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 1.5px solid #dcdde1;
-            border-radius: 4px;
-            font-family: inherit;
-            box-sizing: border-box;
-            transition: 0.3s;
-        }
-        .form-group input:focus { border-color: var(--nta-blue); outline: none; background: #f0f7ff; }
-
-        .btn-primary {
-            background: var(--nta-blue);
-            color: white;
-            border: none;
-            padding: 14px;
-            width: 100%;
-            border-radius: 4px;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 1rem;
-            transition: 0.3s;
-            text-transform: uppercase;
-        }
-        .btn-primary:hover { background: var(--nta-orange); transform: translateY(-2px); }
-
-        /* ===== DASHBOARD UX ===== */
-        .profile-box {
-            background: linear-gradient(to right, #ffffff, #f0f7ff);
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #e1e8ed;
-        }
-        .user-details { display: flex; align-items: center; gap: 15px; }
-        .user-details img {
-            width: 60px; height: 60px; 
-            border: 3px solid var(--white);
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            border-radius: 50%;
-        }
-
-        .exit-btn {
-            text-align: center;
-            color: var(--danger);
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 6px;
-        }
-        .exit-btn:hover { background: #fff1f0; }
-        .exit-btn i { font-size: 1.4rem; display: block; }
-        .exit-btn span { font-size: 10px; font-weight: bold; }
-
-        .action-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            padding: 20px;
-        }
-        @media (min-width: 600px) { .action-grid { grid-template-columns: repeat(3, 1fr); } }
-
-        .action-card {
-            text-decoration: none;
-            color: var(--nta-dark);
-            background: #fff;
-            border: 1px solid #f1f4f9;
-            padding: 20px 10px;
-            text-align: center;
-            border-radius: 8px;
-            transition: 0.3s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-        }
-        .action-card:hover { 
-            border-color: var(--nta-blue); 
-            background: var(--nta-blue); 
-            color: white; 
-            transform: translateY(-5px);
-        }
-        .action-card i { font-size: 1.8rem; display: block; margin-bottom: 10px; }
-        .action-card span { font-weight: bold; font-size: 0.9rem; }
-
-        /* ===== NOTICES ===== */
-        .notice-board { height: 250px; padding: 15px; overflow: hidden; position: relative; }
-        .notice-item {
-            display: block;
-            padding: 10px;
-            border-bottom: 1px dashed #d1d8e0;
-            text-decoration: none;
-            color: #4b6584;
-            font-size: 0.9rem;
-            line-height: 1.4;
-        }
-        .notice-item:hover { color: var(--nta-orange); background: #fafbfc; }
-
-        footer {
-            background: #1e272e;
-            color: #bdc3c7;
-            text-align: center;
-            padding: 30px;
-            font-size: 0.85rem;
-            margin-top: auto;
-        }
-
+        footer { padding: 15px; text-align: center; background: white; font-size: 11px; color: #777; border-top: 1px solid #ddd; position: relative; bottom: 0; width: 100%; box-sizing: border-box; }
         .hidden { display: none; }
+        @media (max-width: 900px) { .grid-container { grid-template-columns: repeat(2, 1fr); } }
     </style>
 </head>
 <body oncontextmenu="return false;">
 
-<div class="top-nav">
-    <a href="index.html" class="back-home"><i class="fas fa-university"></i> INSTITUTION HOME</a>
-    <div style="font-weight: bold; color: var(--nta-blue); font-size: 0.8rem;">V4.0 SECURE ACCESS</div>
+<div class="banner-container">
+    <img src="https://ik.imagekit.io/8v5m0fw9z/Blue%20and%20White%20Modern%20Coming%20Soon%20Email%20Header.png" alt="GEOID Banner">
 </div>
 
-<div class="hero-banner">
-    <h1>GEOID STUSY CENTRE</h1>
-    <p>Student ERP Portal 2026</p>
+<div id="auth-section">
+    <div id="login-view" class="auth-card">
+        <h3 style="color:var(--primary-deep); margin-bottom:20px;">STUDENT LOGIN</h3>
+        <form id="login-form">
+            <input type="email" id="login-email" class="form-input" placeholder="Email Address" required>
+            <input type="password" id="login-password" class="form-input" placeholder="Password" required>
+            <button type="submit" class="btn-submit">LOGIN</button>
+        </form>
+        <p style="font-size:12px; margin-top:15px;">New User? <a href="#" onclick="toggleAuth()" style="color:red; font-weight:bold;">Register Here</a></p>
+    </div>
+
+    <div id="signup-view" class="auth-card hidden">
+        <h3 style="color:var(--primary-deep); margin-bottom:20px;">REGISTRATION</h3>
+        <form id="signup-form">
+            <input type="text" id="signup-name" class="form-input" placeholder="Full Name" required>
+            <input type="email" id="signup-email" class="form-input" placeholder="Email Address" required>
+            <input type="password" id="signup-password" class="form-input" placeholder="Password" required>
+            <p style="text-align:left; font-size:10px; color:gray; margin:5px 0 0;">Upload Profile Photo:</p>
+            <input type="file" id="signup-photo" class="form-input" accept="image/*">
+            <button type="submit" class="btn-submit">CREATE ACCOUNT</button>
+        </form>
+        <p><a href="#" onclick="toggleAuth()" style="font-weight:bold; color:var(--grid-color); font-size:12px;">Back to Login</a></p>
+    </div>
 </div>
 
-<div class="wrapper">
-    <div class="glass-card mobile-hide" style="height: fit-content;">
-        <div class="section-header"><i class="fas fa-link"></i> Quick Navigation</div>
-        <div style="padding: 10px;">
-            <a href="#" class="notice-item"><i class="fas fa-chevron-right"></i> Course Prospectus</a>
-            <a href="#" class="notice-item"><i class="fas fa-chevron-right"></i> Examination Rules</a>
-            <a href="#" class="notice-item"><i class="fas fa-chevron-right"></i> Helpdesk Support</a>
+<div id="dashboard-view" class="hidden portal-main">
+    <div class="sidebar">
+        <div class="profile-area">
+            <img id="d-photo" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Student">
+            <h4 id="d-name">STUDENT NAME</h4>
         </div>
+        <div class="menu-label">Portal Resources</div>
+        <ul class="nav-list">
+            <li><i class="fas fa-user-edit"></i> Edit Profile</li>
+            <li onclick="logout()" style="color:red; font-weight:bold;"><i class="fas fa-sign-out-alt"></i> Logout</li>
+        </ul>
     </div>
 
-    <div class="glass-card">
-        <div id="login-view" class="auth-container">
-            <h2>Candidate Login</h2>
-            <form id="login-form">
-                <div class="form-group">
-                    <label>Registration Email</label>
-                    <input type="email" id="login-email" placeholder="example@mail.com" required>
-                </div>
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" id="login-password" placeholder="Enter Password" required>
-                </div>
-                <button type="submit" class="btn-primary">Sign In to Dashboard</button>
-            </form>
-            <p style="margin-top: 20px; font-size: 0.9rem;">
-                New Candidate? <a href="#" onclick="toggleAuth()" style="color: var(--nta-orange); font-weight: bold;">Register Now</a>
-            </p>
-            <div id="status-msg" style="color:var(--danger); font-size: 13px; font-weight: bold; margin-top: 10px;"></div>
-        </div>
-
-        <div id="signup-view" class="auth-container hidden">
-            <h2>Create Candidate Account</h2>
-            <form id="signup-form">
-                <div class="form-group">
-                    <label>Full Name</label>
-                    <input type="text" id="signup-name" required>
-                </div>
-                <div class="form-group">
-                    <label>Email ID</label>
-                    <input type="email" id="signup-email" required>
-                </div>
-                <div class="form-group">
-                    <label>Create Password</label>
-                    <input type="password" id="signup-password" required>
-                </div>
-                <button type="submit" class="btn-primary">Register Account</button>
-            </form>
-            <p style="margin-top: 15px;"><a href="#" onclick="toggleAuth()" style="color: var(--nta-blue); font-weight: bold;">Return to Login</a></p>
-        </div>
-
-        <div id="dashboard-view" class="hidden">
-            <div class="profile-box">
-                <div class="user-details">
-                    <img id="d-photo" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="Profile">
-                    <div>
-                        <h3 id="d-name" style="margin: 0;">Candidate</h3>
-                        <small id="d-email" style="color: #7f8c8d;"></small>
-                    </div>
-                </div>
-                <div class="exit-btn" onclick="logout()">
-                    <i class="fas fa-power-off"></i>
-                    <span>LOGOUT</span>
-                </div>
-            </div>
-
-            <div class="action-grid">
-                <a href="#" class="action-card"><i class="fas fa-file-invoice"></i><span>Materials</span></a>
-                <a href="#" class="action-card"><i class="fas fa-calendar-check"></i><span>Attendance</span></a>
-                <a href="#" class="action-card"><i class="fas fa-wallet"></i><span>Fees</span></a>
-                <a href="#" class="action-card"><i class="fas fa-graduation-cap"></i><span>Results</span></a>
-                <a href="#" class="action-card"><i class="fas fa-id-badge"></i><span>ID Card</span></a>
-                <a href="#" class="action-card"><i class="fas fa-cog"></i><span>Settings</span></a>
-            </div>
-        </div>
-    </div>
-
-    <div class="glass-card">
-        <div class="section-header"><i class="fas fa-bullhorn"></i> Important Notices</div>
-        <div class="notice-board">
-            <marquee direction="up" scrollamount="2" onmouseover="this.stop();" onmouseout="this.start();" style="height: 100%;">
-                <a href="#" class="notice-item">● Admission open for 2026 Board batches.</a>
-                <a href="#" class="notice-item">● Geography Practical Map sets available for download.</a>
-                <a href="#" class="notice-item">● Mock Test series scheduled for next Sunday.</a>
-                <a href="#" class="notice-item">● Office closed on Feb 14th for local holiday.</a>
-            </marquee>
-        </div>
-        <div style="background: #f8f9fc; padding: 10px; text-align: center; border-top: 1px solid #eee;">
-            <a href="#" style="font-size: 0.8rem; color: var(--nta-blue); font-weight: bold; text-decoration: none;">VIEW ALL ANNOUNCEMENTS</a>
+    <div class="content-area">
+        <div class="grid-container">
+            <a href="#" id="link-tutorial" class="grid-box"><i class="fas fa-book-open"></i><span>DAILY TUTORIAL</span></a>
+            <a href="#" id="link-qbank" class="grid-box"><i class="fas fa-layer-group"></i><span>QUESTION BANK</span></a>
+            <a href="#" id="link-mcq" class="grid-box"><i class="fas fa-pencil-alt"></i><span>MCQ PRACTICE</span></a>
+            <a href="#" id="link-test" class="grid-box"><i class="fas fa-file-alt"></i><span>WEEKLY TEST</span></a>
+            <a href="#" id="link-assignment" class="grid-box"><i class="fas fa-tasks"></i><span>ASSIGNMENT</span></a>
+            <a href="#" id="link-notice" class="grid-box"><i class="fas fa-bullhorn"></i><span>NOTICE</span></a>
+            <a href="#" id="link-fees" class="grid-box"><i class="fas fa-rupee-sign"></i><span>FEES</span></a>
+            <a href="#" id="link-result" class="grid-box"><i class="fas fa-chart-line"></i><span>RESULT</span></a>
         </div>
     </div>
 </div>
 
 <footer>
-    <div style="margin-bottom: 10px;">
-        <strong>GEOID STUDY CENTRE - CONTAI</strong>
-    </div>
-    <div style="font-size: 0.75rem; opacity: 0.8;">
-        Official Candidate Access Portal. Unauthorized access is strictly prohibited.
-    </div>
-    <div style="margin-top: 15px;">
-        Designed & Powered by <a href="#" style="color: var(--nta-orange); text-decoration: none; font-weight: bold;">Subhadip Cyber Technology</a>
-    </div>
+    © 2026 GEOID Study Centre | Developed by <span style="color:var(--primary-deep); font-weight:bold;">Subhadip Cyber Technology</span>
 </footer>
 
 <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
 <script>
-    // Supabase Configuration
-    const supabaseUrl = "https://vokowckwmrrlqzvfcxcl.supabase.co";
-    const supabaseKey = "sb_publishable_oZMLBAUIUbepAtUeThvT7w_DP7Kaj5N";
+    // --- SUPABASE CONFIGURATION ---
+    const supabaseUrl = "https://vthljyiepifevycrglbb.supabase.co";
+    const supabaseKey = "sb_publishable_YSDbjlGYZ1-Y33Og2VD0PQ_BYRcrzhM";
     const sb = supabase.createClient(supabaseUrl, supabaseKey);
 
-    const loginView = document.getElementById("login-view");
-    const signupView = document.getElementById("signup-view");
-    const dashboardView = document.getElementById("dashboard-view");
-    const statusMsg = document.getElementById("status-msg");
-
     function toggleAuth(){
-        loginView.classList.toggle("hidden");
-        signupView.classList.toggle("hidden");
-        statusMsg.innerText = "";
+        document.getElementById("login-view").classList.toggle("hidden");
+        document.getElementById("signup-view").classList.toggle("hidden");
     }
 
-    function showDashboard(user){
-        loginView.classList.add("hidden");
-        signupView.classList.add("hidden");
-        dashboardView.classList.remove("hidden");
-        document.getElementById("d-name").innerText = user.user_metadata?.full_name || "Candidate";
-        document.getElementById("d-email").innerText = user.email;
-        if(user.user_metadata?.photo_url) document.getElementById("d-photo").src = user.user_metadata.photo_url;
+    // --- DASHBOARD LOADER ---
+    async function showDashboard(user) {
+        document.getElementById("auth-section").classList.add("hidden");
+        document.getElementById("dashboard-view").classList.remove("hidden");
+
+        // Fetch profile data from 'profiles' table
+        const { data: profile } = await sb
+            .from('profiles')
+            .select('full_name, avatar_url')
+            .eq('id', user.id)
+            .single();
+
+        if (profile) {
+            document.getElementById("d-name").innerText = profile.full_name;
+            if (profile.avatar_url) document.getElementById("d-photo").src = profile.avatar_url;
+        }
+
+        // Fetch dynamic content from 'student_contents' table
+        loadStudentContents(user.email);
     }
 
-    // Auto Login Check
-    (async()=>{
-        const { data } = await sb.auth.getUser();
-        if(data.user) showDashboard(data.user);
+    async function loadStudentContents(email) {
+        const { data: contents, error } = await sb
+            .from('student_contents')
+            .select('id, student_email, content_type, file_url, title')
+            .eq('student_email', email);
+
+        if (contents) {
+            contents.forEach(item => {
+                const boxId = `link-${item.content_type.toLowerCase().trim()}`;
+                const boxElement = document.getElementById(boxId);
+                if (boxElement) {
+                    boxElement.href = item.file_url;
+                    boxElement.target = "_blank";
+                    boxElement.querySelector('span').innerText = item.title;
+                    boxElement.style.background = "#2ecc71"; // Success Green
+                    boxElement.style.boxShadow = "0 5px 15px rgba(46, 204, 113, 0.4)";
+                }
+            });
+        }
+    }
+
+    // --- AUTHENTICATION HANDLERS ---
+    (async () => {
+        const { data: { user } } = await sb.auth.getUser();
+        if (user) showDashboard(user);
     })();
 
-    // Login Submission
-    document.getElementById("login-form").addEventListener("submit", async e=>{
+    document.getElementById("login-form").addEventListener("submit", async e => {
         e.preventDefault();
-        statusMsg.innerText = "Verifying Credentials...";
-        const { data, error } = await sb.auth.signInWithPassword({ 
-            email: document.getElementById("login-email").value, 
-            password: document.getElementById("login-password").value 
+        const { data, error } = await sb.auth.signInWithPassword({
+            email: document.getElementById("login-email").value,
+            password: document.getElementById("login-password").value
         });
-        if(error) statusMsg.innerText = "Login Failed: Authentication Error";
+        if (error) alert("Login Failed: " + error.message);
         else showDashboard(data.user);
     });
 
-    // Signup Submission
-    document.getElementById("signup-form").addEventListener("submit", async e=>{
+    document.getElementById("signup-form").addEventListener("submit", async e => {
         e.preventDefault();
-        const { error } = await sb.auth.signUp({
-            email: document.getElementById("signup-email").value,
-            password: document.getElementById("signup-password").value,
-            options:{ data:{ full_name: document.getElementById("signup-name").value } }
-        });
-        if(error) alert(error.message);
-        else { alert("Registration Successful! Please Sign In."); toggleAuth(); }
-    });
+        const email = document.getElementById("signup-email").value;
+        const password = document.getElementById("signup-password").value;
+        const name = document.getElementById("signup-name").value;
+        const photoFile = document.getElementById("signup-photo").files[0];
 
-    // Logout Function
-    async function logout(){
-        if(confirm("Confirm Logout: Are you sure you want to end your session?")) {
-            await sb.auth.signOut();
+        // 1. Create Auth User
+        const { data: authData, error: authError } = await sb.auth.signUp({ email, password });
+        if (authError) return alert("Signup Error: " + authError.message);
+
+        // 2. Handle Photo Upload to 'avatars' bucket
+        let photoUrl = "";
+        if (photoFile && authData.user) {
+            const fileName = `avatar_${authData.user.id}_${Date.now()}`;
+            const { data: uploadData } = await sb.storage.from('avatars').upload(fileName, photoFile);
+            if (uploadData) {
+                photoUrl = sb.storage.from('avatars').getPublicUrl(fileName).data.publicUrl;
+            }
+        }
+
+        // 3. Insert into 'profiles' table
+        if (authData.user) {
+            await sb.from('profiles').insert([{ 
+                id: authData.user.id, 
+                full_name: name, 
+                avatar_url: photoUrl 
+            }]);
+            alert("Account created successfully! Please login.");
             location.reload();
         }
+    });
+
+    async function logout() {
+        await sb.auth.signOut();
+        location.reload();
     }
 </script>
 </body>
