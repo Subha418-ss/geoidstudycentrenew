@@ -29,7 +29,6 @@
             background-color: rgba(255, 255, 255, 0.92);
             color: var(--dark);
             user-select: none;
-            overflow-x: hidden; /* Prevent horizontal scroll */
         }
 
         /* ===== PROFESSIONAL TOP BAR ===== */
@@ -70,7 +69,6 @@
             align-items: center;
             justify-content: center;
             background: white;
-            flex-shrink: 0;
         }
         .logo-circle img { height: 35px; width: auto; object-fit: contain; }
 
@@ -78,16 +76,14 @@
         .bangla-slogan { font-family: 'Hind Siliguri', sans-serif; font-weight: 700; color: #555; font-size: 0.85rem; margin-top: 3px; }
 
         .auth-buttons { display: flex; gap: 10px; }
-        .btn-top { padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.75rem; color: white; white-space: nowrap; }
+        .btn-top { padding: 8px 18px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 0.75rem; color: white; }
         .btn-student { background: var(--dark); }
         .btn-admin { background: var(--primary); }
 
-        /* Navigation */
         nav { background: var(--secondary); position: sticky; top: 0; z-index: 1000; }
         nav ul { list-style: none; margin: 0; padding: 0; display: flex; justify-content: center; }
         nav ul li a { color: white; text-decoration: none; padding: 15px 20px; display: block; font-weight: 600; font-size: 0.85rem; }
         nav ul li a:hover { background: var(--primary); }
-        .menu-toggle { display: none; background: var(--primary); color: white; border: none; padding: 10px; width: 100%; font-weight: bold; cursor: pointer; }
 
         .notice-ticker {
             background: #fff3cd;
@@ -177,48 +173,17 @@
         .dev-credit { margin-top: 40px; padding-top: 20px; border-top: 1px solid #333; text-align: center; }
         .dev-link { display: inline-flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); padding: 10px 20px; border-radius: 50px; border: 1px solid var(--accent); text-decoration: none; color: var(--accent); font-weight: 800; }
 
-        /* ===== MOBILE RESPONSIVE UPDATES ===== */
         @media (max-width: 992px) {
             .main-grid { grid-template-columns: 1fr; }
-            .hero h2 { font-size: 2.2rem; }
         }
 
         @media (max-width: 768px) {
-            header { flex-direction: column; gap: 15px; text-align: center; }
-            .top-info-bar { flex-direction: column; gap: 8px; text-align: center; }
-            .info-left, .info-right { justify-content: center; }
-            
-            /* Responsive Navigation */
-            .menu-toggle { display: block; }
-            nav ul { display: none; flex-direction: column; width: 100%; }
-            nav ul.active { display: flex; }
-            nav ul li a { text-align: center; border-bottom: 1px solid rgba(255,255,255,0.1); }
-
-            .hero { height: 280px; }
-            .hero h2 { font-size: 1.8rem; }
-            
-            .stats-bar { 
-                flex-direction: column; 
-                gap: 20px; 
-                align-items: center; 
-                margin-top: -30px;
-                width: 95%;
-            }
+            header { flex-direction: column; gap: 15px; }
+            .hero h2 { font-size: 2rem; }
+            .stats-bar { flex-direction: column; gap: 20px; align-items: center; }
             .ceo-card { flex-direction: column; }
-            .ceo-image { height: 300px; min-width: 100%; }
-            .ceo-content { padding: 25px; }
-            .ceo-content h2 { font-size: 1.8rem; }
-            
-            .auth-buttons { width: 100%; justify-content: center; }
-            .btn-top { flex: 1; text-align: center; font-size: 0.65rem; padding: 8px 10px; }
-        }
-
-        @media (max-width: 480px) {
-            .brand-text h1 { font-size: 1.2rem; }
-            .bangla-slogan { font-size: 0.7rem; }
-            .logo-circle { height: 35px; width: 35px; }
-            .logo-circle img { height: 25px; }
-            .notice-ticker { font-size: 0.75rem; }
+            .ceo-image { height: 300px; }
+            .top-info-bar { flex-direction: column; gap: 5px; text-align: center; }
         }
     </style>
 </head>
@@ -252,23 +217,20 @@
     </header>
 
     <nav>
-        <button class="menu-toggle" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i> MAIN MENU
-        </button>
-        <ul id="navMenu">
+        <ul>
             <li><a href="index.html">HOME</a></li>
             <li><a href="Admission.html">ADMISSION</a></li>
             <li><a href="#">COURSES</a></li>
             <li><a href="resource.html">RESOURCES</a></li>
-            <li><a href="geoidstudycentre-djlyg.wordpress.com">ALUMNI</a></li>
+            <li><a href="https://geoidstudycentre-djlyg.wordpress.com/">ALUMNI</a></li>
             <li><a href="contact.html">CONTACT</a></li>
         </ul>
     </nav>
 
     <div class="notice-ticker">
-        <span class="ticker-label"><i class="fas fa-bullhorn"></i> URGENT</span>
+        <span class="ticker-label"><i class="fas fa-bullhorn"></i> UPDATE</span>
         <marquee onmouseover="this.stop();" onmouseout="this.start();">
-            Admission Open for 2026 batches. | Download Madhyamik Suggestion 2026 from the resources section. | Congratulations to our students for 100% success rate in 2025 examinations.
+            Important instruction for Madhyamik Candidate 2026 | Check Notice Section
         </marquee>
     </div>
 
@@ -325,22 +287,11 @@
                     <i class="fas fa-clipboard-list"></i> NOTICE BOARD
                 </div>
                 <div class="notice-list">
-                    <a href="#" class="notice-item">
-                        <span class="notice-date">30 JAN 2026</span>
-                        <span class="notice-text">Registration open for the Mock Test Series 2026.</span>
+                    <a href="https://drive.google.com/file/d/1dWnPaBi0NMORQpIg7gwI78oCJFC6ujXN/view?usp=sharing" class="notice-item">
+                        <span class="notice-date">31 JAN 2026</span>
+                        <span class="notice-text">Important instruction for Madhyamik Candidate 2026</span>
                     </a>
-                    <a href="#" class="notice-item">
-                        <span class="notice-date">25 JAN 2026</span>
-                        <span class="notice-text">Holiday Notice: Saraswati Puja celebration at the centre.</span>
-                    </a>
-                    <a href="#" class="notice-item">
-                        <span class="notice-date">15 JAN 2026</span>
-                        <span class="notice-text">New Geography Map Pointing classes start from Monday.</span>
-                    </a>
-                    <a href="#" class="notice-item">
-                        <span class="notice-date">10 JAN 2026</span>
-                        <span class="notice-text">Alumni Meet 2026: Registration extended until February.</span>
-                    </a>
+
                 </div>
                 <div style="text-align: right; margin-top: 15px;">
                     <a href="notice.html" style="font-size: 0.75rem; color: var(--blue-dept); font-weight: 800; text-decoration: none;">VIEW ALL NOTICES →</a>
@@ -352,7 +303,7 @@
                 <div class="video-container">
                     <iframe src="https://www.youtube.com/embed/Jy7UlXnA4mo" frameborder="0" allowfullscreen></iframe>
                 </div>
-                <p style="font-size: 0.8rem; font-weight: bold;">জোয়ার ভাটা: কারণ ও ফলাফল বিস্তারিত আলোচনা</p>
+                <p style="font-size: 0.8rem; font-weight: bold;">GEOID STUDY CENTRE</p>
             </div>
         </aside>
     </div>
@@ -369,7 +320,7 @@
                     Welcome to Geoid Study Centre. Our mission is conceptual clarity. Under <strong>Mr. Sukdeb Das</strong>, we continue to lead.
                 </p>
                 <p style="margin-top: 20px; font-weight: bold; color: var(--primary);">
-                    — Mr. Sukdeb Das<br><br>
+                    — Mr. Sukdeb Das<br>
                     <span style="font-size: 0.8rem; color: #777;">Founder & CEO, Geoid Study Centre</span>
                 </p>
             </div>
@@ -397,18 +348,12 @@
         <div class="dev-credit">
             <p style="font-size: 0.8rem; margin-bottom: 15px;">&copy; 2026 Geoid Study Centre. All Rights Reserved.</p>
             <a href="https://subha418-ss.github.io/Subhadip-Satpati/" class="dev-link" target="_blank">
-                <span>DESIGNED & DEVELOPED BY SUBHADIP SATPATI</span>
+                <span>DESIGNED & DEVELOPED BY SUBHADIP CYBER TECHNOLOGY</span>
             </a>
         </div>
     </footer>
 
     <script>
-        // Toggle Mobile Menu
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
-        }
-
         // Update Date and Day
         function updateDateTime() {
             const now = new Date();
