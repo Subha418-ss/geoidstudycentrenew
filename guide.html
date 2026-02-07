@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Instruction - GEOID STUDY CENTRE</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fff;
+            padding-bottom: 80px;
+        }
+
+        /* Header Section */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            border-bottom: 2px solid #0056b3;
+        }
+        .header img { height: 70px; }
+        .college-info { text-align: center; flex-grow: 1; }
+        .college-info h1 { margin: 0; color: #2c3e50; font-size: 24px; }
+        .college-info p { margin: 5px 0; font-size: 13px; }
+
+        /* Instruction Title Bar */
+        .title-bar {
+            background-color: #e3f2fd;
+            color: #0056b3;
+            text-align: center;
+            padding: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            border-top: 1px solid #ddd;
+            border-bottom: 1px solid #ddd;
+            text-transform: uppercase;
+        }
+
+        /* Instruction Table */
+        .instruction-container {
+            padding: 10px 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 10px;
+            font-size: 13px;
+            color: #a94442; /* Image-er moto reddish color */
+            vertical-align: top;
+            line-height: 1.5;
+        }
+        .sl-no {
+            width: 30px;
+            text-align: center;
+            font-weight: bold;
+            color: #333;
+        }
+        tr:nth-child(even) {
+            background-color: #fafafa;
+        }
+
+        /* Checkbox & Button Section */
+        .action-area {
+            text-align: center;
+            margin-top: 30px;
+            padding: 20px;
+        }
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #a94442;
+        }
+        .btn-continue {
+            background-color: #5bc0de;
+            color: white;
+            border: none;
+            padding: 10px 30px;
+            font-size: 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .btn-continue:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+        .btn-continue:hover:not(:disabled) {
+            background-color: #31b0d5;
+        }
+
+        /* Footer Fixed */
+        .footer-sticky {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: #e8f5e9;
+            border-top: 1px solid #ccc;
+            padding: 10px 0;
+            overflow: hidden;
+            z-index: 1000;
+        }
+        .footer-scroll {
+            display: inline-block;
+            white-space: nowrap;
+            animation: footer-scroll 30s linear infinite;
+            font-weight: bold;
+            color: #333;
+            font-size: 13px;
+        }
+        @keyframes footer-scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <img src="https://deliberate-amber-gfvdqe4djb.edgeone.app/logo.jpg" alt="Logo">
+        <div class="college-info">
+            <h1>GEOID STUDY CENTRE</h1>
+            <p>Accredited by NAAC: Grade-A+ CGPA-3.60</p>
+            <p>Central Bus Stand Area, Contai, Purba Medinipur, West Bengal - 721401</p>
+        </div>
+        <img src="https://via.placeholder.com/70x70?text=CTO" alt="CTO">
+    </div>
+
+    <div class="title-bar">Admission Instruction</div>
+
+    <div class="instruction-container">
+        <table>
+            <tr>
+                <td class="sl-no">1</td>
+                <td>You need to register yourself first against the institute by filling up the Application form.</td>
+            </tr>
+            <tr>
+                <td class="sl-no">2</td>
+                <td>After successful registration unique application number and password will be SMS & Email to you.</td>
+            </tr>
+            <tr>
+                <td class="sl-no">3</td>
+                <td>Save your Admission Details.</td>
+            </tr>
+            <tr>
+                <td class="sl-no">4</td>
+                <td>Fill the form Correctly</td>
+            </tr>
+            <tr>
+                <td class="sl-no">5</td>
+                <td>Modification of information is Comming Soon.</td>
+            </tr>
+            <tr>
+                <td class="sl-no">6</td>
+                <td>Once you save the application you can always modify by logging in and clicking modify profile.</td>
+            </tr>
+            <tr>
+        </table>
+    </div>
+
+    <div class="action-area">
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="agreeCheckbox" onclick="toggleButton()">
+            <label for="agreeCheckbox">I have read and understood all the information.</label>
+        </div>
+        <button id="continueBtn" class="btn-continue" disabled onclick="window.location.href='form.html'">Continue</button>
+    </div>
+
+    <div class="footer-sticky">
+        <div class="footer-scroll">
+            TECHNICAL HELPDESK NO: 8207084112 (FROM 7 AM TO 9 PM) | Email: geoidstudycentre@gmail.com | Geoid Study Centre
+        </div>
+    </div>
+
+    <script>
+        function toggleButton() {
+            const checkbox = document.getElementById('agreeCheckbox');
+            const btn = document.getElementById('continueBtn');
+            btn.disabled = !checkbox.checked;
+        }
+    </script>
+
+</body>
+</html>
