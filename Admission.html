@@ -3,301 +3,241 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Registration | GEOID STUDY CENTRE</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <title>GEOID STUDY CENTRE - Admission Portal</title>
     <style>
-        :root {
-            --nta-blue: #0b4a8f;
-            --nta-light-blue: #e7f1ff;
-            --nta-orange: #f38120;
-            --bg-gray: #f2f2f2;
-            --border-color: #ced4da;
-        }
-
+        /* General Styles */
         body {
-            font-family: "Times New Roman", Times, serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: var(--bg-gray);
-            font-size: 15px;
-            overflow-x: hidden; /* Prevent horizontal scroll */
+            background-color: #fff;
+            /* EI PADDING TI HIDE PROBLEM SOLVE KORBE */
+            padding-bottom: 70px; 
         }
 
-        /* Top Govt-Style Header */
-        .gov-top-bar {
-            background: #fff;
-            padding: 10px 5%;
+        /* Header Section */
+        .header {
             display: flex;
+            align-items: center;
             justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #ddd;
-            flex-wrap: wrap; /* Allows stacking on small screens */
-            gap: 15px;
-        }
-
-        .gov-logos { display: flex; align-items: center; gap: 20px; }
-        .gov-logos img { height: 60px; max-width: 100%; }
-
-        .header-title { text-align: right; }
-        .header-title h2 { margin: 0; color: var(--nta-blue); font-size: clamp(18px, 4vw, 22px); text-transform: uppercase; }
-        .header-title p { margin: 0; font-weight: bold; color: #444; font-size: clamp(12px, 3vw, 14px); }
-
-        /* Blue Navigation Bar */
-        nav {
-            background: var(--nta-blue);
-            padding: 0 5%;
-            display: flex;
-            align-items: center;
-            overflow-x: auto; /* Allows swiping on mobile */
-            white-space: nowrap;
-        }
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 12px 15px;
-            font-size: 14px;
-            font-weight: bold;
-            border-right: 1px solid rgba(255,255,255,0.2);
-        }
-        nav a:hover { background: rgba(255,255,255,0.1); }
-        nav a.active { background: var(--nta-orange); }
-
-        /* Page Content */
-        .container {
-            max-width: 1200px;
-            margin: 20px auto;
-            background: #fff;
-            border: 1px solid #ccc;
-            min-height: 80vh;
-        }
-
-        .page-heading {
-            background: #f9f9f9;
             padding: 10px 20px;
-            border-bottom: 1px solid #ccc;
-            color: #d9534f;
-            font-weight: bold;
-            font-size: 18px;
+            border-bottom: 2px solid #0056b3;
         }
+        .header img { height: 70px; }
+        .college-info { text-align: center; flex-grow: 1; }
+        .college-info h1 { margin: 0; color: #2c3e50; font-size: 24px; }
+        .college-info p { margin: 5px 0; font-size: 14px; }
 
-        .form-wrapper { padding: clamp(15px, 5vw, 30px); }
-
-        .instruction-box {
-            background: #fff3cd;
-            border: 1px solid #ffeeba;
-            padding: 15px;
-            margin-bottom: 25px;
-            font-size: 13px;
-            color: #856404;
-        }
-
-        /* JEE Main Style Grid Form */
-        fieldset {
-            border: 1px solid var(--border-color);
-            margin-bottom: 25px;
-            padding: 20px;
-        }
-        legend {
-            padding: 0 10px;
-            font-weight: bold;
-            color: var(--nta-blue);
-            font-size: 16px;
-        }
-
-        .form-grid {
+        /* Main Grid */
+        .grid-container {
             display: grid;
-            grid-template-columns: 1fr 1.5fr;
+            grid-template-columns: repeat(4, 1fr);
             gap: 15px;
-            align-items: center;
-        }
-
-        label { font-weight: bold; color: #333; }
-        
-        input, select, textarea {
-            padding: 8px;
-            border: 1px solid var(--border-color);
-            width: 100%;
-            box-sizing: border-box;
-            font-family: "Times New Roman", serif;
-            font-size: 16px; /* Prevents auto-zoom on iOS */
-        }
-
-        input:focus { border-color: var(--nta-blue); outline: none; box-shadow: 0 0 4px rgba(11,74,143,0.2); }
-
-        .btn-container {
-            text-align: center;
             padding: 20px;
-            border-top: 1px solid #ccc;
-            background: #f9f9f9;
-            display: flex;
-            justify-content: center;
-            gap: 10px;
         }
-
-        .btn-nta {
-            background: var(--nta-blue);
-            color: white;
-            padding: 10px 30px;
-            border: none;
-            font-weight: bold;
-            cursor: pointer;
-            font-size: 16px;
+        .card {
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            min-height: 200px;
         }
-        .btn-nta:hover { background: #083a70; }
-
-        footer {
-            background: #333;
-            color: white;
-            padding: 20px 5%;
+        .card-header {
+            padding: 8px;
             text-align: center;
+            font-weight: bold;
+            font-size: 13px;
+            border-bottom: 1px solid #ddd;
+        }
+        .bg-blue { background-color: #e3f2fd; color: #004085; }
+        .bg-red { background-color: #fce4ec; color: #721c24; }
+        .bg-green { background-color: #e8f5e9; color: #155724; }
+
+        .btn-list { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .btn {
+            padding: 8px;
+            border: none;
+            color: white;
+            cursor: pointer;
+            text-align: center;
+            font-size: 12px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-red { background-color: #d9534f; }
+        .btn-blue { background-color: #337ab7; }
+        .btn-green { background-color: #5cb85c; }
+        .btn-cyan { background-color: #5bc0de; }
+        .btn-orange { background-color: #f0ad4e; }
+
+        /* Scrolling Announcement Section */
+        .announcement-container {
+            margin: 10px 20px;
+            border: 1px solid #ffc1074a;
+        }
+        .announcement-row {
+            display: flex;
+            align-items: center;
+            background-color: #f8f9fa;
+            border-bottom: 1px solid #eee;
+            overflow: hidden;
+            height: 40px;
+        }
+        .announcement-label {
+            background-color: #e9ecef;
+            padding: 0 15px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            font-size: 14px;
+            color: #0056b3;
+            z-index: 2;
+            white-space: nowrap;
+            border-right: 2px solid #fff;
+        }
+        .scroll-wrapper {
+            flex-grow: 1;
+            overflow: hidden;
+            position: relative;
+        }
+        .scroll-text {
+            display: inline-block;
+            white-space: nowrap;
+            padding-left: 100%;
+            animation: scroll-left 20s linear infinite;
+            color: #444;
+            font-size: 14px;
+        }
+        @keyframes scroll-left {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Disclaimer Section (Yellow Box Style) */
+        .covid-box {
+            text-align: center;
+            margin: 30px;
+            padding: 15px;
+            border: 1px solid #ddd;
+        }
+        .covid-title { color: red; font-weight: bold; margin-bottom: 10px; }
+        .covid-text { 
+            color: #856404; 
+            background-color: #fff3cd; 
+            padding: 15px; 
+            font-size: 12px; 
+            font-weight: bold;
+            text-align: left;
+            border: 1px solid #ffeeba;
+        }
+
+        /* Footer Scrolling */
+        .footer-sticky {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #e8f5e9;
+            border-top: 1px solid #ccc;
+            padding: 10px 0;
+            overflow: hidden;
+            z-index: 999;
+        }
+        .footer-scroll {
+            display: inline-block;
+            white-space: nowrap;
+            animation: footer-scroll 25s linear infinite;
+            font-weight: bold;
+            color: #333;
             font-size: 13px;
         }
-
-        /* ===== MOBILE RESPONSIVE UPDATES ===== */
-        @media (max-width: 768px) {
-            .gov-top-bar { justify-content: center; text-align: center; }
-            .header-title { text-align: center; }
-            
-            .form-grid { 
-                grid-template-columns: 1fr; /* Stack labels and inputs */
-                gap: 5px;
-            }
-            
-            .form-grid label {
-                margin-top: 10px;
-            }
-
-            .container { margin: 0; border: none; }
-            
-            .btn-container { flex-direction: column; }
-            .btn-nta, button[type="reset"] { width: 100%; }
-        }
-
-        @media (max-width: 480px) {
-            .gov-logos img { height: 50px; }
-            nav a { padding: 12px 10px; font-size: 12px; }
+        @keyframes footer-scroll {
+            from { transform: translateX(100%); }
+            to { transform: translateX(-100%); }
         }
     </style>
 </head>
 <body>
 
-    <div class="gov-top-bar">
-        <div class="gov-logos">
-            <img src="https://deliberate-amber-gfvdqe4djb.edgeone.app/logo.jpg" alt="Centre Logo">
+    <div class="header">
+        <img src="https://deliberate-amber-gfvdqe4djb.edgeone.app/logo.jpg" alt="CEO">
+        <div class="college-info">
+            <h1>GEOID STUDY CENTRE</h1>
+            <p>COACHING INSTITUTE, CONTAI</p>
+            <p>Central Bus Stand Area, Contai, Purba Medinipur, West Bengal - 721401</p>
         </div>
-        <div class="header-title">
-            <h2>Geoid Study Centre</h2>
-            <p>Registration Portal for Academic Sessions 2026-27</p>
-        </div>
+        <img src="https://ik.imagekit.io/8v5m0fw9z/Black___Blue_Minimalist_Modern_Initial_Font_Logo-removebg-preview.png?updatedAt=1767436479923" alt="CTO">
     </div>
 
-    <nav>
-        <a href="index.html"><i class="fas fa-home"></i></a>
-        <a href="#" class="active">Registration</a>
-        <a href="#">Information Bulletin</a>
-        <a href="#">Contact Us</a>
-    </nav>
-
-    <div class="container">
-        <div class="page-heading">Registration Form</div>
-        
-        <div class="form-wrapper">
-            <div class="instruction-box">
-                <strong>Instructions:</strong> <br>
-                1. Candidates must provide their own Mobile Number and Email ID. <br>
-                2. One candidate can apply for one course only. <br>
-                3. Please ensure all details match your school records.
+    <div class="grid-container">
+        <div class="card">
+            <div class="card-header bg-blue">INFORMATION</div>
+            <div class="btn-list">
+                <div class="btn btn-red">GUIDELINE</div>
+                <div class="btn btn-blue">COURSE INFO & FEES</div>
+                <div class="btn btn-green">CEO DESK</div>
+                <div class="btn btn-cyan">CTO DESK</div>
             </div>
+        </div>
 
-            <form action="#">
-                <fieldset>
-                    <legend>Personal Details</legend>
-                    <div class="form-grid">
-                        <label>Candidate's Name:</label>
-                        <input type="text" required>
+        <div class="card">
+            <div class="card-header bg-red">IMPORTANT NOTICE</div>
+            <div style="padding: 10px; font-size: 12px; color: #0056b3;">
+                <ul>
+                    
+                </ul>
+            </div>
+        </div>
 
-                        <label>Father's Name:</label>
-                        <input type="text" required>
+        <div class="card">
+            <div class="card-header bg-green">TECHNICAL SUPPORT</div>
+            <div style="padding: 15px; font-size: 13px; color: red; font-weight: bold;">
+                TECHNICAL HELPDESK: 8207084112<br>
+                (7 AM TO 9 PM)
+            </div>
+        </div>
 
-                        <label>Mother's Name:</label>
-                        <input type="text" required>
-
-                        <label>Date of Birth:</label>
-                        <div style="display: flex; gap: 5px;">
-                            <select style="flex: 1;"><option>Day</option></select>
-                            <select style="flex: 1;"><option>Month</option></select>
-                            <select style="flex: 1;"><option>Year</option></select>
-                        </div>
-
-                        <label>Gender:</label>
-                        <select required>
-                            <option value="">--Select--</option>
-                            <option>Male</option>
-                            <option>Female</option>
-                            <option>Other</option>
-                        </select>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Contact Details</legend>
-                    <div class="form-grid">
-                        <label>Address:</label>
-                        <textarea rows="2" required></textarea>
-
-                        <label>Locality:</label>
-                        <input type="text">
-
-                        <label>District:</label>
-                        <input type="text" required>
-
-                        <label>Mobile Number:</label>
-                        <div style="display: flex;">
-                            <span style="background: #eee; padding: 8px; border: 1px solid #ccc; border-right: 0;">+91</span>
-                            <input type="tel" style="flex: 1;" required>
-                        </div>
-
-                        <label>Email Address:</label>
-                        <input type="email" required>
-                    </div>
-                </fieldset>
-
-                <fieldset>
-                    <legend>Academic Selection</legend>
-                    <div class="form-grid">
-                        <label>Course Applying For:</label>
-                        <select required>
-                            <option value="">--Select Course--</option>
-                            <option>Class X (Madhyamik)</option>
-                            <option>Class XII (HS Geography)</option>
-                            <option>Computer Application</option>
-                        </select>
-                        
-                        <label>Upload Photo:</label>
-                        <input type="file" required style="font-size: 14px;">
-                    </div>
-                </fieldset>
-
-                <div class="btn-container">
-                    <button type="submit" class="btn-nta">Submit Application</button>
-                    <button type="reset" style="padding: 10px 20px; cursor: pointer; background: #fff; border: 1px solid #ccc; font-weight: bold;">Clear</button>
-                </div>
-            </form>
+        <div class="card">
+            <div class="card-header bg-blue">APPLICANT'S AREA</div>
+            <div class="btn-list">
+                <a href="guide.html" style="text-decoration: none;"><div class="btn btn-blue">APPLY NOW</div></a>
+                <a href="login.html" style="text-decoration: none;"><div class="btn btn-green">LOG IN</div></a>
+                <a href="merit-list.html" style="text-decoration: none;"><div class="btn btn-cyan">STUDENT LIST</div></a>
+                <a href="dates.html" style="text-decoration: none;"><div class="btn btn-orange">ALUMNI REGISTRATION</div></a>
+            </div>
         </div>
     </div>
 
-    <footer>
-        <p>Disclaimer: This portal is designed and maintained by Geoid Technical Team.</p>
-        <p>&copy; 2026 Geoid Study Centre. Version 4.0.0</p>
-    </footer>
+    <div class="announcement-container">
+        <div class="announcement-row">
+            <div class="announcement-label">Announcement :</div>
+            <div class="scroll-wrapper">
+                <div class="scroll-text">Admission open for 2026 batches. Contact helpdesk for more details.</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="covid-box">
+        <div class="covid-title">DISCLAIMER</div>
+        <div class="covid-text">
+           <p>1. The information provided by GEOID STUDY CENTRE is curated for high-level educational guidance. While we strive for absolute precision, all content is provided "as is" without express warranties.</p>
+           <p>2. Engagement with our digital assets constitutes an acknowledgement that GEOID STUDY CENTRE shall not be held liable for indirect or consequential damages arising from the use of this information.</p>
+           <p>3. External links are provided for convenience. We do not exercise editorial control over third-party domains and assume no responsibility for their privacy practices or content accuracy.</p>
+           <p style="margin-top:10px; border-top: 1px solid #ffeeba; padding-top: 5px;">Last updated: 28th December 2025</p> 
+        </div>
+    </div>
+    NOTIFICATION :
+
+    <div class="footer-sticky">
+        <div class="footer-scroll" id="footerText">
+            TECHNICAL HELPDESK NO: 8207084112 (FROM 7 AM TO 9 PM) | Email: geoidstudycentre@gmail.com | Geoid Study Centre
+        </div>
+    </div>
 
     <script>
-        // Retention of current date functionality if needed
-        document.onkeydown = function(e) {
-            if(e.keyCode == 123) return false;
-            if(e.ctrlKey && e.shiftKey && (e.keyCode == 73 || e.keyCode == 74 || e.keyCode == 67)) return false;
-            if(e.ctrlKey && e.keyCode == 85) return false;
-        };
+        const footer = document.getElementById('footerText');
+        footer.addEventListener('mouseover', () => { footer.style.animationPlayState = 'paused'; });
+        footer.addEventListener('mouseout', () => { footer.style.animationPlayState = 'running'; });
     </script>
+
 </body>
 </html>
