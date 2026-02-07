@@ -7,152 +7,153 @@
     <style>
         /* General Styles */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #fff;
-            /* EI PADDING TI HIDE PROBLEM SOLVE KORBE */
-            padding-bottom: 70px; 
+            background-color: #f4f7f6;
+            padding-bottom: 80px; /* Space for sticky footer */
         }
 
-        /* Header Section */
+        /* Header Section - Responsive Flex */
         .header {
             display: flex;
+            flex-direction: row;
             align-items: center;
             justify-content: space-between;
-            padding: 10px 20px;
-            border-bottom: 2px solid #0056b3;
+            padding: 15px 5%;
+            border-bottom: 3px solid #0056b3;
+            background-color: #fff;
+            gap: 10px;
         }
-        .header img { height: 70px; }
+        .header img { height: 60px; width: auto; }
         .college-info { text-align: center; flex-grow: 1; }
-        .college-info h1 { margin: 0; color: #2c3e50; font-size: 24px; }
-        .college-info p { margin: 5px 0; font-size: 14px; }
+        .college-info h1 { margin: 0; color: #2c3e50; font-size: 20px; text-transform: uppercase; }
+        .college-info p { margin: 3px 0; font-size: 12px; color: #555; }
 
-        /* Main Grid */
+        /* Main Grid - Responsive Layout */
         .grid-container {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            padding: 20px;
+            /* Laptop-e 4 column, Tablet-e 2, Mobile-e 1 */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 20px 5%;
         }
+
         .card {
+            background: white;
             border: 1px solid #ddd;
-            border-radius: 4px;
-            min-height: 200px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
         }
+
         .card-header {
-            padding: 8px;
+            padding: 12px;
             text-align: center;
             font-weight: bold;
-            font-size: 13px;
+            font-size: 14px;
             border-bottom: 1px solid #ddd;
         }
         .bg-blue { background-color: #e3f2fd; color: #004085; }
         .bg-red { background-color: #fce4ec; color: #721c24; }
         .bg-green { background-color: #e8f5e9; color: #155724; }
 
-        .btn-list { padding: 10px; display: flex; flex-direction: column; gap: 8px; }
+        .btn-list { padding: 15px; display: flex; flex-direction: column; gap: 10px; }
         .btn {
-            padding: 8px;
+            padding: 10px;
             border: none;
             color: white;
             cursor: pointer;
             text-align: center;
-            font-size: 12px;
-            border-radius: 4px;
+            font-size: 13px;
+            border-radius: 5px;
             font-weight: bold;
+            transition: opacity 0.3s;
         }
+        .btn:hover { opacity: 0.8; }
         .btn-red { background-color: #d9534f; }
         .btn-blue { background-color: #337ab7; }
         .btn-green { background-color: #5cb85c; }
         .btn-cyan { background-color: #5bc0de; }
         .btn-orange { background-color: #f0ad4e; }
 
-        /* Scrolling Announcement Section */
-        .announcement-container {
-            margin: 10px 20px;
-            border: 1px solid #ffc1074a;
-        }
+        /* Announcement Section */
+        .announcement-container { margin: 10px 5%; border: 1px solid #ffeeba; }
         .announcement-row {
             display: flex;
             align-items: center;
-            background-color: #f8f9fa;
-            border-bottom: 1px solid #eee;
+            background-color: #fff9e6;
+            height: 45px;
             overflow: hidden;
-            height: 40px;
         }
         .announcement-label {
-            background-color: #e9ecef;
+            background-color: #ffc107;
             padding: 0 15px;
             height: 100%;
             display: flex;
             align-items: center;
             font-weight: bold;
             font-size: 14px;
-            color: #0056b3;
             z-index: 2;
             white-space: nowrap;
-            border-right: 2px solid #fff;
         }
-        .scroll-wrapper {
-            flex-grow: 1;
-            overflow: hidden;
-            position: relative;
-        }
+        .scroll-wrapper { flex-grow: 1; overflow: hidden; position: relative; }
         .scroll-text {
             display: inline-block;
             white-space: nowrap;
             padding-left: 100%;
-            animation: scroll-left 20s linear infinite;
-            color: #444;
+            animation: scroll-left 15s linear infinite;
             font-size: 14px;
+            font-weight: 500;
         }
         @keyframes scroll-left {
             0% { transform: translateX(0); }
             100% { transform: translateX(-100%); }
         }
 
-        /* Disclaimer Section (Yellow Box Style) */
-        .covid-box {
-            text-align: center;
-            margin: 30px;
-            padding: 15px;
-            border: 1px solid #ddd;
-        }
-        .covid-title { color: red; font-weight: bold; margin-bottom: 10px; }
+        /* Disclaimer Section */
+        .covid-box { margin: 20px 5%; padding: 0; }
+        .covid-title { color: #d9534f; font-weight: bold; margin-bottom: 10px; text-align: center; }
         .covid-text { 
             color: #856404; 
             background-color: #fff3cd; 
-            padding: 15px; 
-            font-size: 12px; 
-            font-weight: bold;
-            text-align: left;
+            padding: 20px; 
+            font-size: 13px; 
+            line-height: 1.6;
+            border-radius: 8px;
             border: 1px solid #ffeeba;
         }
 
-        /* Footer Scrolling */
+        /* Footer Sticky */
         .footer-sticky {
             position: fixed;
             bottom: 0;
-            left: 0;
             width: 100%;
-            background-color: #e8f5e9;
-            border-top: 1px solid #ccc;
-            padding: 10px 0;
-            overflow: hidden;
-            z-index: 999;
+            background-color: #2c3e50;
+            color: white;
+            padding: 12px 0;
+            z-index: 1000;
         }
         .footer-scroll {
-            display: inline-block;
             white-space: nowrap;
-            animation: footer-scroll 25s linear infinite;
-            font-weight: bold;
-            color: #333;
+            display: inline-block;
+            animation: footer-scroll 20s linear infinite;
             font-size: 13px;
         }
         @keyframes footer-scroll {
             from { transform: translateX(100%); }
             to { transform: translateX(-100%); }
+        }
+
+        /* Mobile Adjustments */
+        @media (max-width: 600px) {
+            .header { flex-direction: column; text-align: center; }
+            .header img { height: 50px; }
+            .college-info h1 { font-size: 18px; }
+            .grid-container { grid-template-columns: 1fr; } /* Single column on mobile */
+            .announcement-label { font-size: 12px; padding: 0 8px; }
         }
     </style>
 </head>
@@ -163,7 +164,7 @@
         <div class="college-info">
             <h1>GEOID STUDY CENTRE</h1>
             <p>COACHING INSTITUTE, CONTAI</p>
-            <p>Central Bus Stand Area, Contai, Purba Medinipur, West Bengal - 721401</p>
+            <p>Central Bus Stand Area, Purba Medinipur, WB - 721401</p>
         </div>
         <img src="https://ik.imagekit.io/8v5m0fw9z/Black___Blue_Minimalist_Modern_Initial_Font_Logo-removebg-preview.png?updatedAt=1767436479923" alt="CTO">
     </div>
@@ -181,8 +182,8 @@
 
         <div class="card">
             <div class="card-header bg-red">IMPORTANT NOTICE</div>
-            <div style="padding: 10px; font-size: 12px; color: #0056b3;">
-                <ul>
+            <div style="padding: 15px; font-size: 13px; color: #0056b3;">
+                <ul style="padding-left: 20px; margin: 0;">
                     
                 </ul>
             </div>
@@ -190,9 +191,11 @@
 
         <div class="card">
             <div class="card-header bg-green">TECHNICAL SUPPORT</div>
-            <div style="padding: 15px; font-size: 13px; color: red; font-weight: bold;">
-                TECHNICAL HELPDESK: 8207084112<br>
-                (7 AM TO 9 PM)
+            <div style="padding: 20px; text-align: center;">
+                <span style="font-size: 14px; color: #d9534f; font-weight: bold;">
+                    HELPDESK: 8207084112
+                </span>
+                <p style="font-size: 12px; color: #666; margin-top: 5px;">(7 AM TO 9 PM)</p>
             </div>
         </div>
 
@@ -209,9 +212,9 @@
 
     <div class="announcement-container">
         <div class="announcement-row">
-            <div class="announcement-label">Announcement :</div>
+            <div class="announcement-label">Announcement:</div>
             <div class="scroll-wrapper">
-                <div class="scroll-text">Admission open for 2026 batches. Contact helpdesk for more details.</div>
+                <div class="scroll-text">Admission open for 2026 batches. Contact helpdesk for more details. • Welcome to GEOID Study Centre.</div>
             </div>
         </div>
     </div>
@@ -219,17 +222,18 @@
     <div class="covid-box">
         <div class="covid-title">DISCLAIMER</div>
         <div class="covid-text">
-           <p>1. The information provided by GEOID STUDY CENTRE is curated for high-level educational guidance. While we strive for absolute precision, all content is provided "as is" without express warranties.</p>
-           <p>2. Engagement with our digital assets constitutes an acknowledgement that GEOID STUDY CENTRE shall not be held liable for indirect or consequential damages arising from the use of this information.</p>
-           <p>3. External links are provided for convenience. We do not exercise editorial control over third-party domains and assume no responsibility for their privacy practices or content accuracy.</p>
-           <p style="margin-top:10px; border-top: 1px solid #ffeeba; padding-top: 5px;">Last updated: 28th December 2025</p> 
+            1. All information is curated for educational guidance.<br>
+            2. Engagement constitutes acknowledgement of terms.<br>
+            3. We are not responsible for third-party links.<br>
+            <div style="margin-top:10px; border-top: 1px solid #ffeeba; padding-top: 5px; font-size: 11px;">
+                Last updated: 28th December 2025
+            </div> 
         </div>
     </div>
-    NOTIFICATION :
 
     <div class="footer-sticky">
         <div class="footer-scroll" id="footerText">
-            TECHNICAL HELPDESK NO: 8207084112 (FROM 7 AM TO 9 PM) | Email: geoidstudycentre@gmail.com | Geoid Study Centre
+            TECHNICAL HELPDESK NO: 8207084112 (7 AM TO 9 PM) | Email: geoidstudycentre@gmail.com | GEOID STUDY CENTRE, CONTAI
         </div>
     </div>
 
