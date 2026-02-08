@@ -52,7 +52,43 @@
 
         footer { padding: 15px; text-align: center; background: white; font-size: 11px; color: #777; border-top: 1px solid #ddd; }
         .hidden { display: none !important; }
-        @media (max-width: 900px) { .grid-container { grid-template-columns: repeat(2, 1fr); } .sidebar { display: none; } }
+
+        /* --- Updated Mobile Responsive Styles --- */
+        @media (max-width: 900px) { 
+            .portal-main { flex-direction: column; } /* মোবাইলে সাইডবার উপরে আসবে */
+            .sidebar { 
+                width: 100%; 
+                border-right: none; 
+                border-bottom: 2px solid #ddd;
+            }
+            .grid-container { 
+                grid-template-columns: repeat(2, 1fr); 
+                padding: 10px;
+            } 
+            .content-area {
+                padding: 15px;
+            }
+            .profile-area {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                text-align: left;
+                padding: 15px;
+            }
+            .profile-area img {
+                width: 60px;
+                height: 70px;
+            }
+            .nav-list {
+                display: flex;
+                flex-wrap: wrap;
+                background: #f8f9fa;
+            }
+            .nav-list li {
+                flex: 1 1 45%; /* মেনু আইটেমগুলো দুই কলামে দেখাবে */
+                border: 1px solid #eee;
+            }
+        }
     </style>
 </head>
 <body oncontextmenu="return false;">
@@ -97,13 +133,11 @@
             <li onclick="openFeature('MY COURSES', 'courses')"><i class="fas fa-graduation-cap"></i> My Courses</li>
             <li onclick="openFeature('ATTENDANCE', 'attendance')"><i class="fas fa-calendar-check"></i> Attendance</li>
             <li onclick="openFeature('CLASS ROUTINE', 'routine')"><i class="fas fa-clock"></i> Class Routine</li>
-            <li onclick="openFeature('EXAM SCHEDULE', 'exams')"><i class="fas fa-clipboard-list"></i> Exam Schedule</li>
         </ul>
 
         <div class="menu-label">Settings & Support</div>
         <ul class="nav-list">
             <li onclick="openFeature('EDIT PROFILE', 'profile_edit')"><i class="fas fa-user-edit"></i> Edit Profile</li>
-            <li onclick="openFeature('HELP DESK', 'support')"><i class="fas fa-headset"></i> Help Desk</li>
             <li onclick="logout()" style="color:red; font-weight:bold;"><i class="fas fa-sign-out-alt"></i> Logout</li>
         </ul>
     </div>
