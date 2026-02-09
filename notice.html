@@ -4,230 +4,235 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Notice Board | GEOID STUDY CENTRE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    
     <style>
         :root {
             --mc-orange: #f38120;
-            --mc-black: #000000;
-            --mc-bg: #f2f2f2;
-            --mc-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+            --mc-black: #121212;
+            --mc-bg: #f2f4f7;
+            --text-main: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #d1d5db;
         }
 
-        html, body { height: 100%; margin: 0; }
-        
         body { 
-            font-family: "Times New Roman", Times, serif; 
+            font-family: 'Inter', sans-serif; 
             background-color: var(--mc-bg); 
-            color: #333; 
-            line-height: 1.6;
+            margin: 0; 
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+            color: var(--text-main);
+        }
+
+        /* Header Section */
+        header { 
+            background: var(--mc-black); 
+            padding: 15px 6%; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            border-bottom: 4px solid var(--mc-orange); 
+            color: white;
+        }
+
+        .brand-box { display: flex; align-items: center; gap: 15px; }
+        .brand-box img { 
+            height: 45px; width: 45px; 
+            border-radius: 50%; border: 2px solid white;
+            object-fit: cover;
+        }
+        .brand-box h1 { font-size: 1.3rem; margin: 0; }
+
+        .home-btn { 
+            color: white; text-decoration: none; 
+            font-size: 0.9rem; font-weight: 600; 
+            padding: 8px 18px; border: 1px solid white;
+            border-radius: 4px;
+        }
+
+        /* Main Container */
+        .container { 
+            max-width: 1200px; 
+            margin: 20px auto; 
+            display: grid; 
+            grid-template-columns: 8.5fr 3.5fr; 
+            gap: 20px; 
+            padding: 0 15px; 
+            flex: 1; 
+        }
+
+        @media (max-width: 992px) {
+            .container { grid-template-columns: 1fr; }
+        }
+
+        .section-title { 
+            font-size: 1.2rem; 
+            font-weight: 700; 
+            margin-bottom: 20px; 
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        /* Notice Grid: Side by Side */
+        .notice-grid { 
+            display: grid; 
+            grid-template-columns: repeat(2, 1fr); 
+            gap: 15px; 
+        }
+
+        @media (max-width: 768px) {
+            .notice-grid { grid-template-columns: 1fr; }
+        }
+
+        /* Normal Notice Card */
+        .notice-card { 
+            background: #ffffff; 
+            padding: 20px; 
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
             display: flex;
             flex-direction: column;
         }
 
-        /* Important Notice Bar */
-        .important-notice-header {
-            background: var(--mc-black); 
-            display: flex; 
-            align-items: stretch; 
-            min-height: 38px; 
-            border-bottom: 1px solid #333;
+        .category-tag { 
+            font-size: 0.7rem; 
+            font-weight: 700; 
+            color: var(--mc-orange);
+            text-transform: uppercase; 
+            margin-bottom: 8px;
         }
-        .important-label {
-            background: var(--mc-orange); 
+
+        .notice-card h3 { margin: 0 0 10px 0; font-size: 1.15rem; color: #000; }
+        
+        .meta-text { font-size: 0.8rem; color: var(--text-muted); margin-bottom: 12px; }
+        .meta-text span { margin-right: 15px; }
+
+        .description { font-size: 0.9rem; color: #334155; line-height: 1.5; margin-bottom: 15px; flex: 1; }
+
+        .see-more { 
+            text-decoration: none; 
+            background: #f3f4f6;
             color: #000; 
-            font-weight: bold; 
-            padding: 0 15px; 
-            display: flex; 
-            align-items: center; 
-            white-space: nowrap; 
+            font-weight: 600; 
             font-size: 0.8rem; 
-            position: relative; 
-            z-index: 2;
-        }
-        @media (min-width: 480px) {
-            .important-label::after {
-                content: ""; position: absolute; right: -15px; top: 0; border-top: 38px solid var(--mc-orange); border-right: 15px solid transparent;
-            }
-        }
-        .ticker-container { flex: 1; overflow: hidden; display: flex; align-items: center; color: white; font-size: 0.85rem; padding: 0 10px; }
-
-        /* Header */
-        header { 
-            background: var(--mc-black); 
-            padding: 15px 5%; 
-            display: flex; 
-            flex-direction: column; 
-            align-items: center; 
-            gap: 15px;
-            border-bottom: 4px solid var(--mc-orange); 
-        }
-        @media (min-width: 768px) {
-            header { flex-direction: row; justify-content: space-between; }
+            text-align: center;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
         }
 
-        .brand-box { display: flex; align-items: center; gap: 12px; }
-        .brand-box img { height: 50px; width: 50px; border-radius: 50%; border: 2px solid #fff; } 
-        .brand-text h1 { margin: 0; color: #fff; font-size: 1.3rem; letter-spacing: 1px; text-align: center; }
-        @media (min-width: 768px) { .brand-text h1 { font-size: 1.6rem; text-align: left; } }
-
-        .home-btn {
-            color: white; text-decoration: none; font-size: 0.85rem; font-weight: bold; 
-            border: 1px solid #444; padding: 8px 20px; border-radius: 4px; transition: 0.3s;
-        }
-        .home-btn:hover { background: var(--mc-orange); color: #000; border-color: var(--mc-orange); }
-
-        .content-area { flex: 1; } 
-
-        .container { 
-            max-width: 1250px; 
-            margin: 20px auto; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 20px; 
-            padding: 0 15px; 
-        }
-        @media (min-width: 992px) { 
-            .container { display: grid; grid-template-columns: 8.5fr 3.5fr; margin: 30px auto; } 
+        /* Sidebar Design */
+        .sidebar-card { 
+            background: #fff; 
+            padding: 20px; 
+            border: 1px solid var(--border-color);
+            border-top: 4px solid var(--mc-orange);
         }
 
-        .notice-grid { display: grid; grid-template-columns: 1fr; gap: 20px; }
-        @media (min-width: 640px) {
-            .notice-grid { grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); }
+        .filter-item {
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+            font-size: 0.85rem;
         }
-
-        .notice-card {
-            background: #fff; padding: 20px; border-radius: 4px; box-shadow: var(--mc-shadow); border: 1px solid #ddd; display: flex; flex-direction: column;
-        }
-        .category-tag { color: #0b4a8f; font-size: 0.7rem; font-weight: bold; text-transform: uppercase; margin-bottom: 10px; }
-        .notice-card h3 { margin: 0 0 10px 0; font-size: 1.1rem; line-height: 1.3; color: #222; font-weight: bold; }
-        .meta-text { font-size: 0.8rem; color: #666; border-bottom: 1px solid #eee; padding-bottom: 10px; margin-bottom: 15px; }
-        .see-more { text-decoration: none; color: #000; font-weight: bold; font-size: 0.85rem;  display: inline-flex; align-items: center; gap: 6px; margin-top: auto; }
-
-        .filter-sidebar { 
-            background: #fff; border-left: 4px solid var(--mc-orange); padding: 20px; box-shadow: var(--mc-shadow); min-height: 100px; 
-        }
-        .filter-sidebar h3 { margin: 0 0 10px 0; font-size: 1.3rem; border-bottom: 1px solid #eee; padding-bottom: 8px; }
+        .filter-item:last-child { border-bottom: none; }
         
-        #loader { text-align: center; padding: 50px; font-weight: bold; color: var(--mc-orange); }
-        
+        .link-btn {
+            color: #2563eb; text-decoration: underline;
+            font-weight: 600; display: inline-block; margin-top: 5px;
+        }
+
         footer { 
             background: var(--mc-black); 
-            color: #888; 
-            padding: 25px 5%; 
+            color: #ccc; 
+            padding: 25px; 
             text-align: center; 
             font-size: 0.85rem;
-            border-top: 3px solid var(--mc-orange);
-            width: 100%;
-            box-sizing: border-box;
+            margin-top: 30px;
         }
-        footer b { color: var(--mc-orange); }
+
+        #loader { grid-column: span 2; text-align: center; padding: 30px; }
     </style>
 </head>
-<body oncontextmenu="return false;">
-
-    <div class="important-notice-header">
-        <div class="important-label">Important</div>
-        <div class="ticker-container">
-            <marquee scrollamount="5" onmouseover="this.stop();" onmouseout="this.start();">
-           Class 12th Board Exam 4th Semster Examination - 12 Frebruary 2026
-            </marquee>
-        </div>
-    </div>
+<body>
 
     <header>
         <div class="brand-box">
             <img src="https://deliberate-amber-gfvdqe4djb.edgeone.app/logo.jpg" alt="Logo">
-            <div class="brand-text">
-                <h1>GEOID STUDY CENTRE</h1>
-            </div>
+            <h1>GEOID STUDY CENTRE</h1>
         </div>
         <a href="index.html" class="home-btn">HOME</a>
     </header>
 
-    <div class="content-area">
-        <div class="container">
-            <main class="notice-grid" id="notice-container">
-                <div id="loader"><i class="fas fa-spinner fa-spin"></i> Loading Notices...</div>
-            </main>
+    <div class="container">
+        <main>
+            <div class="section-title">Latest Notifications</div>
+            <div class="notice-grid" id="notice-container">
+                <div id="loader">Fetching data...</div>
+            </div>
+        </main>
 
-            <aside class="filter-sidebar">
-                <h3>Filter</h3>
-                <p style="font-size: 0.8rem; color: #777;"><strong>Best of Luck All Madhyamik Candidate - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;">By - Subhadip Satpati(CTD)</p>
-                 <p style="font-size: 0.8rem; color: #777;"><strong>🆕Madhyamik Bengali Question - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;"><a href="https://www.facebook.com/share/p/1aJE7T65KK/" class="book-btn">https://www.facebook.com/share/p/1aJE7T65KK/</a></p>
-                 <p style="font-size: 0.8rem; color: #777;"><strong>🆕Madhyamik English Question - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;"><a href="https://drive.google.com/file/d/1EOngHQejISA53RDLNgHR_VRBchPKk_kv/view?usp=sharing" class="book-btn">📝Click</a></p>
-                 <p style="font-size: 0.8rem; color: #777;"><strong>🆕Madhyamik History Question - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;"><a href="https://drive.google.com/file/d/1TWE0c-pHAjJmTWTiEVixkhwrhR7McoAc/view?usp=sharing" class="book-btn">History Q-26</a></p>
-                <p style="font-size: 0.8rem; color: #777;"><strong>🆕Madhyamik Geography Question - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;"><a href="https://drive.google.com/file/d/1gi9pDNUk0NCUPuEGIoU0C95iJkS-3Eqx/view?usp=drive_link" class="book-btn">Geography Q-26</a></p>
-                <p style="font-size: 0.8rem; color: #777;"><strong>🆕Madhyamik Mathematics Question - 2026</strong></p>
-                <p style="font-size: 0.8rem; color: #777;"><a href="https://acrobat.adobe.com/link/spaces/urn%3Aaaid%3Asc%3AAP%3Adc49a410-8ec4-4fdb-8192-f7a8c8e7290c/assets/urn%3Aaaid%3Asc%3AAP%3A1ddf5eb2-f114-4f0c-91a1-d72e7719e3fd" class="book-btn">Mathematics Q-26</a></p>   
-            </aside>
-        </div>
+        <aside class="sidebar">
+            <div class="sidebar-card">
+                <h3 style="margin-top:0;">Quick Links</h3>
+                
+                <div class="filter-item">
+                    <b>Madhyamik 2026</b><br>
+                    Daily Question Updates
+                </div>
+
+                <div class="filter-item">
+                    <span>English Question 2026</span>
+                    <a href="https://drive.google.com/file/d/1EOngHQejISA53RDLNgHR_VRBchPKk_kv/view?usp=sharing" class="link-btn">Download</a>
+                </div>
+
+                <div class="filter-item">
+                    <span>History Question 2026</span>
+                    <a href="https://drive.google.com/file/d/1TWE0c-pHAjJmTWTiEVixkhwrhR7McoAc/view?usp=sharing" class="link-btn">View Online</a>
+                </div>
+            </div>
+        </aside>
     </div>
 
     <footer>
         <p>&copy; 2026 <b>GEOID STUDY CENTRE</b>. All Rights Reserved.</p>
-        <p style="font-size: 0.7rem; margin-top: 5px;">Powered by Subhadip Cyber Technology</p>
     </footer>
 
-    <script src="https://unpkg.com/@supabase/supabase-js@2"></script>
     <script>
-        const SUPABASE_URL = "https://pfedboawtntgxmhxbdzo.supabase.co";
-        const SUPABASE_KEY = "sb_publishable_vxtCEjdGCoxcjQTZaf5urA__icNJPcB";
-        const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+        const { createClient } = supabase;
+        const _supabase = createClient('https://jicthwhrtbflrzbolhvu.supabase.co', 'sb_publishable_O5uFeV0DzsGIbBLXYp01Yg_9uujflZS');
 
-        async function fetchNotices() {
+        async function loadNotices() {
             const container = document.getElementById('notice-container');
+            const { data, error } = await _supabase.from('Notice').select('*').order('created_at', { ascending: false });
             
-            // আপনার দেওয়া ডাটাসমূহ একত্রিত করে কুয়েরি:
-            // এটি একবারে id, created_at, title, category, author, এবং pdf_link নিয়ে আসবে
-            const { data: Notice, error } = await supabaseClient
-                .from('Notice')
-                .select('id, created_at, title, category, author, pdf_link')
-                .order('created_at', { ascending: false });
-
-            if (error) {
-                container.innerHTML = "<p style='color:red; text-align:center;'>Error loading notices. Check database name or column names.</p>";
-                console.error("Supabase error:", error.message);
-                return;
+            if (error) { 
+                container.innerHTML = "<div id='loader'>Connection Error.</div>"; 
+                return; 
+            }
+            if (!data || data.length === 0) { 
+                container.innerHTML = "<div id='loader'>No notices found.</div>"; 
+                return; 
             }
 
-            container.innerHTML = "";
-            if (!Notice || Notice.length === 0) {
-                container.innerHTML = "<p style='text-align:center;'>No active notices found in the 'Notice' table.</p>";
-                return;
-            }
-
-            // প্রতিটি নোটিশের জন্য ব্লক তৈরি
-            Notice.forEach(item => {
-                const postDate = new Date(item.created_at).toLocaleDateString('en-GB', {
-                    day: 'numeric', month: 'short', year: 'numeric'
-                });
-
-                container.innerHTML += `
-                    <div class="notice-card">
-                        <div class="category-tag">${item.category || 'GENERAL'}</div>
-                        <h3>${item.title || 'No Title'}</h3>
-                        <div class="meta-text">By ${item.author || 'Admin'} • ${postDate}</div>
-                        <a href="${item.pdf_link || '#'}" target="_blank" class="see-more">
-                            SEE MORE <i class="fas fa-arrow-right"></i>
-                        </a>
+            container.innerHTML = data.map(n => `
+                <div class="notice-card">
+                    <div class="category-tag">${n.category || 'NOTICE'}</div>
+                    <h3>${n.title}</h3>
+                    <div class="meta-text">
+                        <span>By: ${n.author}</span>
+                        <span>Date: ${new Date(n.created_at).toLocaleDateString()}</span>
                     </div>
-                `;
-            });
+                    <p class="description">${n.description || ''}</p>
+                    <a href="${n.pdf_link || '#'}" target="_blank" class="see-more">VIEW ATTACHMENT</a>
+                </div>
+            `).join('');
         }
 
-        // পেজ লোড হলে ডাটা ফেচ শুরু হবে
-        window.onload = fetchNotices;
+        window.onload = loadNotices;
     </script>
 </body>
 </html>
-
-
-
-
-
-
