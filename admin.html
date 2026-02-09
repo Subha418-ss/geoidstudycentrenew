@@ -1,195 +1,87 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html lang="bn">
 <head>
-    <title>AIMES Cloud - Online Admission & ERP Solution</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-
-    <style type="text/css">
-        /* Banner & Background */
-        .banner-wraper {
-            background: linear-gradient(135deg, rgba(0, 114, 255, 0.85) 0%, rgba(0, 198, 251, 0.9) 100%), 
-                        url('../IMAGES/home-bg.jpg') no-repeat;
-            background-size: cover;
-            background-position: center;
-            min-height: 100vh;
-            position: relative;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            overflow: hidden;
-            font-family: 'Segoe UI', Arial, sans-serif;
-        }
-
-        /* Background Watermark Text */
-        .wraper-box {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            pointer-events: none;
-        }
-
-        .wraper-box li {
-            position: absolute;
-            color: rgba(255, 255, 255, 0.1);
-            font-weight: 800;
-            font-size: 2.5rem;
-            text-transform: uppercase;
-            letter-spacing: 5px;
-        }
-
-        .wraper-box li:nth-child(1) { top: 10%; left: 5%; }
-        .wraper-box li:nth-child(2) { top: 20%; right: 10%; }
-        .wraper-box li:nth-child(3) { bottom: 25%; left: 10%; }
-        .wraper-box li:nth-child(4) { bottom: 10%; right: 15%; }
-
-        /* Welcome Box / Login Card */
-        .welcome-box {
-            background: #ffffff;
-            padding: 35px 25px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
-            text-align: center;
-            z-index: 10;
-            max-width: 380px;
-            width: 90%;
-            border-top: 5px solid #0072ff;
-        }
-
-        .welcome-heading img {
-            max-width: 120px; 
-            height: auto;
-            margin-bottom: 15px;
-        }
-
-        .welcome-heading-sub h4 {
-            font-size: 1.1rem;
-            color: #333;
-            font-weight: 700;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-        }
-
-        /* Action Buttons */
-        .welcome-button a {
-            display: block;
-            margin: 12px 0;
-            padding: 12px;
-            background: #0072ff;
-            color: #fff !important;
-            border-radius: 30px;
-            text-decoration: none !important;
-            font-weight: 600;
-            transition: 0.3s;
-            font-size: 14px;
-        }
-
-        .welcome-button a:hover {
-            background: #00c6fb;
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0, 198, 251, 0.4);
-        }
-
-        /* Top Policy Link */
-        .policy-link {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            z-index: 100;
-            text-decoration: none !important;
-        }
-
-        .policy-link h1 {
-            font-size: 12px;
-            color: #fff;
-            border: 1px solid rgba(255,255,255,0.4);
-            padding: 5px 15px;
-            border-radius: 20px;
-            background: rgba(255,255,255,0.1);
-            margin: 0;
-        }
-
-        /* Footer Section */
-        .footer-container { background: #1a1a1a; padding: 50px 0; border-top: 3px solid #00c6fb; }
-        .footer-container h2 { color: #00c6fb; font-size: 1.5rem; margin-bottom: 25px; font-weight: 600; }
-        .footer-container p { color: #ccc; font-size: 14px; margin-bottom: 15px; }
-        .footer-container i { color: #00c6fb; margin-right: 10px; width: 20px; }
-
-        footer { background: #111; padding: 20px 0; }
-        footer p { color: #777; font-size: 13px; margin-bottom: 0; }
-        .text-info { color: #00c6fb !important; font-weight: 600; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Midnapore College - Notice & Staff Portal</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; background-color: #f7f7f7; margin: 0; padding: 20px; display: flex; justify-content: center; }
+        .main-container { width: 100%; max-width: 1000px; background-color: #fff; box-shadow: 0 0 15px rgba(0,0,0,0.1); padding: 15px; border-radius: 4px; }
+        .top-header { margin-bottom: 15px; }
+        .aimes-logo { height: 45px; }
+        .banner-section { width: 100%; margin-bottom: 25px; }
+        .main-banner { width: 100%; height: auto; display: block; border: 1px solid #ddd; }
+        .content-wrapper { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px; padding: 0 10px 20px 10px; }
+        .notice-box, .login-box { flex: 1; min-width: 300px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; height: fit-content; }
+        .box-header { padding: 10px 15px; font-weight: bold; font-size: 15px; }
+        .green-header { background-color: #e2efd9; color: #3e7d3e; border-bottom: 1px solid #c3d6b5; }
+        .yellow-header { background-color: #fff9e6; color: #856404; border-bottom: 1px solid #ffeeba; }
+        .box-body { padding: 15px; min-height: 200px; max-height: 400px; overflow-y: auto; }
+        .notice-item { border-bottom: 1px solid #eee; padding: 10px 0; font-size: 13.5px; color: #333; }
+        .notice-date { font-size: 11px; color: #888; display: block; margin-top: 4px; }
+        .input-field { width: 100%; padding: 10px; margin-bottom: 12px; border: 1px solid #ccc; border-radius: 3px; box-sizing: border-box; outline: none; }
+        .login-btn { background-color: #5bc0de; color: white; border: none; padding: 10px 25px; border-radius: 4px; cursor: pointer; float: right; font-weight: bold; }
+        #login-msg { color: red; font-size: 12px; margin-top: 50px; display: block; font-weight: bold; }
     </style>
 </head>
 <body>
-    <form method="post" action="./default.aspx" id="form1">
-        
-        <a href="https://sites.google.com/view/geoid-study-centre-backside/home" class="policy-link"><h1>Terms & Policy</h1></a>
 
-        <section>
-            <div class="banner-wraper">
-                <ul class="wraper-box">
-                    <li>TABULATION</li>
-                    <li>FEEDBACK</li>
-                    <li>STUDENT</li>
-                    <li>FINANCE</li>
-                </ul>
+    <div class="main-container">
+        <header class="top-header">
+            <img src="https://ik.imagekit.io/8v5m0fw9z/Black___Blue_Minimalist_Modern_Initial_Font_Logo-removebg-preview.png?updatedAt=1767436479923" class="aimes-logo">
+        </header>
 
-                <div class="welcome-box"><img src="https://ik.imagekit.io/8v5m0fw9z/Blue%20and%20White%20Modern%20Coming%20Soon%20Email%20Header.png" alt="Portal Logo">
-                    <div class="welcome-heading">
-                        
-                    </div>
-                    <div class="welcome-heading-sub">
-                        <h4>ERP Portal</h4>
-                    </div>
-                    <div class="welcome-button">
-                        <a href="https://subha418-ss.github.io/geoidstudycentrenew/login.html">STUDENT LOGIN</a>
-                        <a href="https://www.believetowhoitwillbetrue.com/">ADMIN LOGIN</a>
-                    </div>
-                    
-                    <div class="mt-4">
-                        <script type="text/javascript">
-                            var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
-                            document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
-                        </script>
-                        <script language="JavaScript" type="text/javascript">
-                            // Using your custom header image as a trust seal/brand image
-                            TrustLogo("", "POSDV", "none");
-                        </script>
-                    </div>
+        <div class="banner-section">
+            <img src="https://ik.imagekit.io/8v5m0fw9z/Blue%20and%20White%20Modern%20Coming%20Soon%20Email%20Header.png" class="main-banner">
+        </div>
+
+        <div class="content-wrapper">
+            <div class="notice-box">
+                <div class="box-header green-header">General Notice</div>
+                <div class="box-body" id="public-notices">Loading notices...</div>
+            </div>
+
+            <div class="login-box">
+                <div class="box-header yellow-header">Staff Login</div>
+                <div class="box-body">
+                    <input type="email" id="email" placeholder="Email" class="input-field">
+                    <input type="password" id="password" placeholder="Password" class="input-field">
+                    <button class="login-btn" onclick="handleLogin()">Log in</button>
+                    <span id="login-msg"></span>
                 </div>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section class="footer-container text-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-6 mb-4">
-                        <h2>Contact Us</h2>
-                        <p><i class="fa fa-map-marker"></i>Central Bustand, near Kishorenagar school, Dhandighi, Contai, Banamali Pur, West Bengal 721401, India</p>
-                        <p><i class="fa fa-phone"></i> 8207084112</p>
-                        <p><i class="fa fa-envelope-o"></i> satpatiwebdevloper@zohomail.in</p>
-                        <p><i class="fa fa-globe"></i> https://subha418-ss.github.io/Subhadip-Satpati/</p>
-                    </div>
-                    <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=645&amp;height=180&amp;hl=en&amp;q=Contai, Geoid Study &amp;t=h&amp;z=20&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://10minutemail.one">10minutemail</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:180px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:180px;}.gmap_iframe {height:180px!important;}</style></div>
-                    </div>
+    <script>
+        const { createClient } = supabase;
+        const _supabase = createClient('https://jicthwhrtbflrzbolhvu.supabase.co', 'sb_publishable_O5uFeV0DzsGIbBLXYp01Yg_9uujflZS');
+
+        async function loadNotices() {
+            const container = document.getElementById('public-notices');
+            const { data, error } = await _supabase.from('notices').select('*').order('created_at', { ascending: false });
+            if (error) { container.innerHTML = "Error loading notices."; return; }
+            if (!data || data.length === 0) { container.innerHTML = "No notices found."; return; }
+            container.innerHTML = data.map(n => `
+                <div class="notice-item">
+                    <b>•</b> ${n.content}
+                    <span class="notice-date">Published: ${new Date(n.created_at).toLocaleDateString('bn-IN')}</span>
                 </div>
-            </div>
-        </section>
+            `).join('');
+        }
 
-        <footer class="text-center">
-            <div class="container">
-                <p>© Design and Development by <a href="https://subha418-ss.github.io/Subhadip-Satpati/" class="text-info" target="_blank">Subhadip Cyber Technology</a></p>
-            </div>
-        </footer>
-    </form>
+        async function handleLogin() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const msg = document.getElementById('login-msg');
+            msg.innerText = "Checking...";
+            
+            const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
+            if (error) { msg.innerText = "Login Failed: " + error.message; }
+            else { window.location.href = 'staff-portal.html'; }
+        }
+        window.onload = loadNotices;
+    </script>
 </body>
 </html>
