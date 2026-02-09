@@ -1,166 +1,195 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>Admin Access | GEOID STUDY CENTRE</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Crimson+Text:wght@600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        :root {
-            --primary: #B30000;
-            --secondary: #FF9933;
-            --dark-blue: #000080;
-            --dark: #1a1a1a;
-            --light: #ffffff;
-            --gray: #f4f4f4;
+    <title>AIMES Cloud - Online Admission & ERP Solution</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+
+    <style type="text/css">
+        /* Banner & Background */
+        .banner-wraper {
+            background: linear-gradient(135deg, rgba(0, 114, 255, 0.85) 0%, rgba(0, 198, 251, 0.9) 100%), 
+                        url('../IMAGES/home-bg.jpg') no-repeat;
+            background-size: cover;
+            background-position: center;
+            min-height: 100vh;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
         }
 
-        body { margin: 0; font-family: 'Montserrat', sans-serif; background: var(--gray); overflow-x: hidden; }
-
-        /* ===== LOGIN OVERLAY ===== */
-        #login-screen {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(rgba(0,0,128,0.9), rgba(0,0,128,0.9)), 
-                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1200&q=80') center/cover;
-            display: flex; align-items: center; justify-content: center; z-index: 1000;
+        /* Background Watermark Text */
+        .wraper-box {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            pointer-events: none;
         }
-        .login-card {
-            background: white; padding: 40px; border-radius: 15px; width: 350px; text-align: center;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.3); border-top: 6px solid var(--primary);
+
+        .wraper-box li {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.1);
+            font-weight: 800;
+            font-size: 2.5rem;
+            text-transform: uppercase;
+            letter-spacing: 5px;
         }
-        .login-card h2 { font-family: 'Crimson Text', serif; color: var(--dark-blue); margin-bottom: 20px; }
-        .login-card input { width: 100%; padding: 12px; margin-bottom: 15px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
-        .login-card button { width: 100%; padding: 12px; background: var(--primary); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.3s; }
-        .login-card button:hover { background: var(--dark); }
 
-        /* ===== DASHBOARD VIEW ===== */
-        #dashboard { display: none; }
-        .top-nav { background: var(--dark-blue); color: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; border-bottom: 4px solid var(--secondary); }
-        
-        .main-layout { display: grid; grid-template-columns: 250px 1fr; min-height: 90vh; }
-        .sidebar { background: var(--dark); color: #ccc; padding: 20px; }
-        .sidebar a { display: block; color: #ccc; text-decoration: none; padding: 12px; border-radius: 5px; margin-bottom: 5px; font-size: 14px; }
-        .sidebar a:hover, .sidebar a.active { background: var(--primary); color: white; }
+        .wraper-box li:nth-child(1) { top: 10%; left: 5%; }
+        .wraper-box li:nth-child(2) { top: 20%; right: 10%; }
+        .wraper-box li:nth-child(3) { bottom: 25%; left: 10%; }
+        .wraper-box li:nth-child(4) { bottom: 10%; right: 15%; }
 
-        .content { padding: 30px; }
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-bottom: 30px; }
-        .stat-box { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); text-align: center; border-bottom: 4px solid var(--secondary); }
-        .stat-box h3 { margin: 0; font-size: 28px; color: var(--primary); }
-        .stat-box p { margin: 5px 0 0; font-size: 12px; font-weight: bold; color: #777; }
+        /* Welcome Box / Login Card */
+        .welcome-box {
+            background: #ffffff;
+            padding: 35px 25px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+            text-align: center;
+            z-index: 10;
+            max-width: 380px;
+            width: 90%;
+            border-top: 5px solid #0072ff;
+        }
 
-        .data-table { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); overflow-x: auto; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th { text-align: left; padding: 12px; background: #f8f9fa; border-bottom: 2px solid #eee; }
-        td { padding: 12px; border-bottom: 1px solid #eee; font-size: 14px; }
-        
-        .status { padding: 4px 10px; border-radius: 20px; font-size: 11px; font-weight: bold; }
-        .status-on { background: #e8f5e9; color: #2e7d32; }
+        .welcome-heading img {
+            max-width: 120px; 
+            height: auto;
+            margin-bottom: 15px;
+        }
 
-        .hidden { display: none !important; }
+        .welcome-heading-sub h4 {
+            font-size: 1.1rem;
+            color: #333;
+            font-weight: 700;
+            margin-bottom: 25px;
+            text-transform: uppercase;
+        }
+
+        /* Action Buttons */
+        .welcome-button a {
+            display: block;
+            margin: 12px 0;
+            padding: 12px;
+            background: #0072ff;
+            color: #fff !important;
+            border-radius: 30px;
+            text-decoration: none !important;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .welcome-button a:hover {
+            background: #00c6fb;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 198, 251, 0.4);
+        }
+
+        /* Top Policy Link */
+        .policy-link {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            text-decoration: none !important;
+        }
+
+        .policy-link h1 {
+            font-size: 12px;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.4);
+            padding: 5px 15px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.1);
+            margin: 0;
+        }
+
+        /* Footer Section */
+        .footer-container { background: #1a1a1a; padding: 50px 0; border-top: 3px solid #00c6fb; }
+        .footer-container h2 { color: #00c6fb; font-size: 1.5rem; margin-bottom: 25px; font-weight: 600; }
+        .footer-container p { color: #ccc; font-size: 14px; margin-bottom: 15px; }
+        .footer-container i { color: #00c6fb; margin-right: 10px; width: 20px; }
+
+        footer { background: #111; padding: 20px 0; }
+        footer p { color: #777; font-size: 13px; margin-bottom: 0; }
+        .text-info { color: #00c6fb !important; font-weight: 600; }
     </style>
 </head>
 <body>
+    <form method="post" action="./default.aspx" id="form1">
+        
+        <a href="https://sites.google.com/view/geoid-study-centre-backside/home" class="policy-link"><h1>Terms & Policy</h1></a>
 
-<div id="login-screen">
-    <div class="login-card">
-        <i class="fas fa-user-lock" style="font-size: 3rem; color: var(--dark-blue); margin-bottom: 15px;"></i>
-        <h2>Admin Login</h2>
-        <input type="text" id="user" placeholder="Username">
-        <input type="password" id="pass" placeholder="Password">
-        <button onclick="checkLogin()">UNLOCK SYSTEM</button>
-        <p id="error" style="color:red; font-size:12px; margin-top:10px; font-weight:bold;"></p>
-    </div>
-</div>
+        <section>
+            <div class="banner-wraper">
+                <ul class="wraper-box">
+                    <li>TABULATION</li>
+                    <li>FEEDBACK</li>
+                    <li>STUDENT</li>
+                    <li>FINANCE</li>
+                </ul>
 
-<div id="dashboard">
-    <div class="top-nav">
-        <div style="font-family: 'Crimson Text', serif; font-size: 1.4rem;">GEOID ADMIN PORTAL</div>
-        <button onclick="logout()" style="background:none; border:1px solid white; color:white; padding:5px 15px; cursor:pointer; border-radius:5px;">Logout</button>
-    </div>
-
-    <div class="main-layout">
-        <div class="sidebar">
-            <a href="#" class="active"><i class="fas fa-home"></i> Overview</a>
-            <a href="#"><i class="fas fa-users"></i> Students List</a>
-            <a href="#"><i class="fas fa-file-invoice"></i> Admissions</a>
-            <a href="#"><i class="fas fa-wallet"></i> Fee Records</a>
-            <a href="#"><i class="fas fa-cog"></i> Settings</a>
-        </div>
-
-        <div class="content">
-            <div class="stats-grid">
-                <div class="stat-box"><h3>1,248</h3><p>TOTAL STUDENTS</p></div>
-                <div class="stat-box"><h3>42</h3><p>NEW THIS MONTH</p></div>
-                <div class="stat-box"><h3>95%</h3><p>ATTENDANCE AVG</p></div>
-                <div class="stat-box"><h3>Active</h3><p>SERVER STATUS</p></div>
+                <div class="welcome-box"><img src="https://ik.imagekit.io/8v5m0fw9z/Blue%20and%20White%20Modern%20Coming%20Soon%20Email%20Header.png" alt="Portal Logo">
+                    <div class="welcome-heading">
+                        
+                    </div>
+                    <div class="welcome-heading-sub">
+                        <h4>ERP Portal</h4>
+                    </div>
+                    <div class="welcome-button">
+                        <a href="https://subha418-ss.github.io/geoidstudycentrenew/login.html">STUDENT LOGIN</a>
+                        <a href="https://www.believetowhoitwillbetrue.com/">ADMIN LOGIN</a>
+                    </div>
+                    
+                    <div class="mt-4">
+                        <script type="text/javascript">
+                            var tlJsHost = ((window.location.protocol == "https:") ? "https://secure.trust-provider.com/" : "http://www.trustlogo.com/");
+                            document.write(unescape("%3Cscript src='" + tlJsHost + "trustlogo/javascript/trustlogo.js' type='text/javascript'%3E%3C/script%3E"));
+                        </script>
+                        <script language="JavaScript" type="text/javascript">
+                            // Using your custom header image as a trust seal/brand image
+                            TrustLogo("", "POSDV", "none");
+                        </script>
+                    </div>
+                </div>
             </div>
+        </section>
 
-            <div class="data-table">
-                <h3 style="margin-top:0;">Recent Student Activity</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Student Name</th>
-                            <th>ID Number</th>
-                            <th>Course</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Subhadip Satpati</td>
-                            <td>GEO-1024</td>
-                            <td>Computer Science</td>
-                            <td>28 Jan 2026</td>
-                            <td><span class="status status-on">Online</span></td>
-                        </tr>
-                        <tr>
-                            <td>Sukdeb Das</td>
-                            <td>GEO-1001</td>
-                            <td>Geography Hons</td>
-                            <td>27 Jan 2026</td>
-                            <td><span class="status status-on">Online</span></td>
-                        </tr>
-                        <tr>
-                            <td>Sample Student</td>
-                            <td>GEO-1055</td>
-                            <td>Pure Science</td>
-                            <td>26 Jan 2026</td>
-                            <td><span class="status" style="background:#eee;">Offline</span></td>
-                        </tr>
-                    </tbody>
-                </table>
+        <section class="footer-container text-white">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 mb-4">
+                        <h2>Contact Us</h2>
+                        <p><i class="fa fa-map-marker"></i>Central Bustand, near Kishorenagar school, Dhandighi, Contai, Banamali Pur, West Bengal 721401, India</p>
+                        <p><i class="fa fa-phone"></i> 8207084112</p>
+                        <p><i class="fa fa-envelope-o"></i> satpatiwebdevloper@zohomail.in</p>
+                        <p><i class="fa fa-globe"></i> https://subha418-ss.github.io/Subhadip-Satpati/</p>
+                    </div>
+                    <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=645&amp;height=180&amp;hl=en&amp;q=Contai, Geoid Study &amp;t=h&amp;z=20&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://10minutemail.one">10minutemail</a></div><style>.mapouter{position:relative;text-align:right;width:100%;height:180px;}.gmap_canvas {overflow:hidden;background:none!important;width:100%;height:180px;}.gmap_iframe {height:180px!important;}</style></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+        </section>
 
-<script>
-    // Simple Login Function
-    function checkLogin() {
-        const u = document.getElementById('user').value;
-        const p = document.getElementById('pass').value;
-        const e = document.getElementById('error');
-
-        // Test Credentials
-        if (u === "admin" && p === "geoid2026") {
-            document.getElementById('login-screen').classList.add('hidden');
-            document.getElementById('dashboard').style.display = 'block';
-        } else {
-            e.innerText = "Error: Invalid Credentials!";
-        }
-    }
-
-    // Logout Function
-    function logout() {
-        location.reload();
-    }
-
-    // Disable Right Click (Optional Security)
-    document.addEventListener('contextmenu', event => event.preventDefault());
-</script>
-
+        <footer class="text-center">
+            <div class="container">
+                <p>© Design and Development by <a href="https://subha418-ss.github.io/Subhadip-Satpati/" class="text-info" target="_blank">Subhadip Cyber Technology</a></p>
+            </div>
+        </footer>
+    </form>
 </body>
 </html>
