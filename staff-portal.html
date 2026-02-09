@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Staff Dashboard | GEOID STUDY CENTRE</title>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        body { font-family: sans-serif; background: #f2f2f2; display: flex; justify-content: center; padding-top: 50px; }
+        .box { width: 450px; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,0.1); }
+        h2 { text-align: center; color: #f38120; }
+        label { font-weight: bold; font-size: 13px; color: #555; display: block; margin-top: 15px; }
+        input, select, textarea { width: 100%; padding: 12px; margin-top: 5px; border: 1px solid #ddd; border-radius: 6px; box-sizing: border-box; }
+        textarea { height: 80px; }
+        button { width: 100%; padding: 12px; background: #f38120; border: none; font-weight: bold; cursor: pointer; border-radius: 6px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <button onclick="logout()" style="float:right; background:#333; color:white; border:none; padding:5px 10px; cursor:pointer; border-radius:4px;">Logout</button>
+        <h2 style="clear:both;">Publish New Notice</h2>
+        <label>Notice Title</label>
+        <input type="text" id="title" placeholder="Notice Title">
+        <label>Category</label>
+        <input type="text" id="category" placeholder="e.g. EXAM, RESULT">
+        <label>Description</label>
+        <textarea id="description" placeholder="Write a short description..."></textarea>
+        <label>Author</label>
+        <input type="text" id="author" placeholder="Admin Name">
+        <label>PDF/Link</label>
+        <input type="text" id="pdf_link" placeholder="Paste URL here">
+        <button onclick="publish()">PUBLISH NOW</button>
+        <p id="status" style="text-align:center; font-weight:bold; margin-top:15px;"></p>
+    </div>
+
+    <script>
+        const { createClient } = supabase;
+        const _supabase = createClient('https://jicthwhrtbflrzbolhvu.supabase.co', 'sb_publishable_O5uFeV0DzsGIbBLXYp01Yg_9uujflZS');
+
+        async function publish() {
+            const status = document.getElementById('status');
+            const noticeData = {
+                title: document.getElementById('title').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                author: document.getElementById('author').value,
+                pdf_link: document.getElementById('pdf_link').value
+            };
+
+            const { error } = await _supabase.from('Notice').insert([noticeData]);
+            if (error) { status.innerText = "Error: " + error.message; status.style.color = "red"; }
+            else { 
+                status.innerText = "Notice Published!"; status.style.color = "green";
+                document.querySelectorAll('input, textarea').forEach(i => i.value = "");
+            }
+        }
+
+        async function logout() { await _supabase.auth.signOut(); window.location.href = 'index.html'; }
+    </script>
+</body>
+</html>
